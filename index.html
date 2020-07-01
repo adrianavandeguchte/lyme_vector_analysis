@@ -3,10 +3,11 @@
   <head>
     <meta charset="UTF-8">
     <title>Home</title>
-    <!-- <link rel="stylesheet" href="WebVisualizations\custom_stylesheet.css"> --!>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="icon" href="static/images/nj_icon.png" type="image/x-icon" sizes="16x16">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static\css\stylesheet.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   </head>
 
   <body>
@@ -17,18 +18,27 @@
         </div>
         <ul class="nav navbar-nav navbar-right">
           <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">Page 1</a></li>
-          <li><a href="#">Page 2</a></li>
-          <li><a href="#">Page 3</a></li>
+          <li><a href="#">Prevention</a></li>
+          <li><a href="#">Documentation</a></li>
+          <li><a href="#">References</a></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">More Info
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="https://www.cdc.gov/lyme/index.html">CDC - Lyme Disease</a></li>
+              <li><a href="https://www.state.nj.us/health/cd/topics/lyme.shtml">NJ DOH</a></li>
+              <li><a href="https://www.lymedisease.org/">LymeDisease.org</a></li>
+            </ul>
+          </li>
         </ul>
       </div>
 </nav>
   <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<div class="page-header">
+			<div class="text-center" id="page-title">
 				<h1>
-					LayoutIt! <small>Interface Builder for Bootstrap</small>
+					Lyme Disease of New Jersey <small>Cases, vectors, reservoirs</small>
 				</h1>
 			</div>
 		</div>
