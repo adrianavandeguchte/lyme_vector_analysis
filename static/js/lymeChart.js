@@ -25,10 +25,26 @@ d3.csv("static/js/lymePeople.csv").then(function(data) {
       });
 
     console.log(data);
+    humanData = data
+    console.log(humanData);
+    //Read the data
+    d3.csv("static/js/lymeDogs.csv").then(function(dogs) {
 
+      // Filtering to the correct selection:
+        dogs = dogs.filter(function(d) {return d.county == "Statewide"})
+          // Format the data
+          dogs.forEach(function(d) {
+            d.year =  parseTime(d.year);
+            d.cases = +d.positive_cases;
+          });
+          console.log(dogs);
+          dogData = dogs
+
+          bothSets = [{set:"Human",values:humanData},{set:"Canine",values:dogData}]
+          console.log("bothSets",bothSets);
     // Add X axis --> it is a date format
     var x = d3.scaleTime()
-      .domain(d3.extent(data, function(d) { return d.year; }))
+      .domain(d3.extent(dogData, function(d) { return d.year; }))
       .range([ 0, width ]);
     svg.append("g")
       .attr("transform", "translate(0," + height + ")")
@@ -36,20 +52,25 @@ d3.csv("static/js/lymePeople.csv").then(function(data) {
 
     // Add Y axis
     var y = d3.scaleLinear()
-      .domain([0, d3.max(data, function(d) { return +d.cases; })])
+      .domain([0, d3.max(dogData, function(d) { return +d.cases; })])
       .range([ height, 0 ]);
     svg.append("g")
       .call(d3.axisLeft(y));
-
+      const line = d3.line()
+          .x(function(d) { return x(d.year); })
+          .y(function(d) { return y(d.cases); });
+    let id = 0;
+    const ids = function () {
+    return "line-"+id++;
+}
     // Add the line
-    svg.append("path")
-      .datum(data)
-      .attr("fill", "none")
-      .attr("stroke", "steelblue")
-      .attr("stroke-width", 1.5)
-      .attr("d", d3.line()
-        .x(function(d) { return x(d.year) })
-        .y(function(d) { return y(d.cases) })
-        )
+    const lines = svg.selectAll("lines")
+        .data(bothSets)
+        .enter()
+        .append("g");
 
+        lines.append("path")
+        .attr("class", ids)
+        .attr("d", function(d) { return line(d.values); });
+    });
 });
