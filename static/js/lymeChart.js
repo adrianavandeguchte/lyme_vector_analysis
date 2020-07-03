@@ -17,6 +17,7 @@ const svg = d3.select("#my_dataviz").append("svg")
     .classed("svg-content", true);
 var parseTime = d3.timeParse("%Y");
 
+
 //Read the data
 d3.csv("static/js/lymePeople.csv").then(function(data_ori) {
 
@@ -104,13 +105,31 @@ d3.csv("static/js/lymePeople.csv").then(function(data_ori) {
           updatedSets = [{set:"Human",values:humanUpdate},{set:"Canine",values:dogUpdate}]
           console.log("updatedSets",updatedSets);
           var line = d3.line()
-              .x(function(d) { return x(d.year); })
-              .y(function(d) { return y(d.cases); });
-          lines.datum(updatedSets)
-          .transition()
-          .duration(1000)
-          .attr("class", ids)
-          .attr("d", function(d) { return line(d.values); });
+              .x(function(d) {
+                console.log(x(d.year))
+                return x(d.year); })
+              .y(function(d) {
+                console.log(y(d.cases))
+                return y(d.cases); })
+                var lines = svg.selectAll("lines")
+                    .data(updatedSets)
+                    .enter()
+                    .append("g");
+
+                    lines.append("path")
+                    .attr("class", ids)
+                    .attr("d", function(d) { return line(d.values); });
+                    lines.append("text")
+                      .attr("class","serie_label")
+                      .datum(function(d) {
+                          return {
+                              set: d.set,
+                              value: d.values[d.values.length - 1]}; })
+                      .attr("transform", function(d) {
+                              return "translate(" + (x(d.value.year) + 10)
+                              + "," + (y(d.value.cases) + 5 ) + ")";})
+                      .attr("x", 5)
+                      .text(function(d) { return d.set; });
 
       }
       // When the button is changed, run the updateChart function
