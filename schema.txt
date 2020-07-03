@@ -1,0 +1,63 @@
+Index
+-
+ID PK Int FK >- Year.Year
+Year FK Int
+County FK Varchar
+
+
+Year
+-
+Year PK Int
+
+Location
+-
+County PK Varchar
+
+Jan
+- 
+Jan Pk Float
+
+Feb
+- 
+Feb Pk Float
+
+Mar
+- 
+Mar Pk Float
+
+Apr
+- 
+Apr Pk Float
+
+Jun
+- 
+Jun Pk Float
+
+Jul
+- 
+Jul Pk Float
+
+Aug
+- 
+Aug Pk Float
+
+Sep
+- 
+Sep Pk Float
+
+Oct
+- 
+Oct Pk Float
+
+Nov
+- 
+Nov Pk Float
+
+Dec
+- 
+Dec Pk Float
+
+
+
+
+
