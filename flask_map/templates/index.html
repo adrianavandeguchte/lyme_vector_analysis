@@ -1,25 +1,16 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-us"
   <head>
     <meta charset="UTF-8">
-    <title>Choropleth</title>
-
-    <!-- Leaflet CSS -->
+    <title>Home</title>
+    <link rel="icon" href="static/images/nj_icon.png" type="image/x-icon" sizes="16x16">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static\css\stylesheet.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
     integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
     crossorigin=""/>
-
-    <!-- Our CSS -->
-    <link rel="stylesheet" type="text/css" href="static/css/stylesheet.css">
-
-  </head>
-  <body>
-
-    <!-- The div where we will inject our map -->
-    <div id="map"></div>
-
-
-    <!-- Leaflet JS-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
     integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
     crossorigin=""></script>
@@ -29,7 +20,7 @@
     <!-- Leaflet-Choropleth JavaScript -->
     <script type="text/javascript" src="static/js/choropleth.js"></script>
 
-    <!-- Our JS -->
+        <!-- Our JS -->
     <script type="text/javascript" src="static/js/config.js"></script>
     <script type="text/javascript" src="static/js/heatmap.js"></script>
     <script type="text/javascript" src="static/js/leaflet-heatmap.js"></script>
@@ -37,5 +28,93 @@
       window.data = {{data|safe}};
     </script>
     <script type="text/javascript" src="static/js/logic.js"></script>
+
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">NJ Lyme</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="static/pages/prev.html">Prevention</a></li>
+          <li><a href="static/pages/doc.html">Documentation</a></li>
+          <li><a href="static/pages/ref.html">References</a></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">More Info
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="https://www.cdc.gov/lyme/index.html">CDC - Lyme Disease</a></li>
+              <li><a href="https://www.state.nj.us/health/cd/topics/lyme.shtml">NJ DOH</a></li>
+              <li><a href="https://www.lymedisease.org/">LymeDisease.org</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+</nav>
+  <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="text-center" id="page-title">
+				<h1>
+					Lyme Disease of New Jersey
+          <br>
+          <small>cases, vectors, reservoirs</small>
+				</h1>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<h3 class="text-center">
+				Lyme disease in NJ
+			</h3>
+      <div id="lymeChart">
+      </div>
+			<p class="text-center">
+				Paragraph of background of what Lyme is and the caustive parasite. <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam ut cursus. <em>Morbi commodo sodales nisi id sodales. Proin consectetur, nisi id commodo imperdiet, metus nunc consequat lectus, id bibendum diam velit et dui.</em> Proin massa magna, vulputate nec bibendum nec, posuere nec lacus. <small>Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla euismod ultrices massa, et feugiat ipsum consequat eu.</small>
+			</p>
+		</div>
+	</div>
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="text-center">
+      Ticks
+      </h3>
+      <div id="map"></div>v
+      </div>
+      <p class="text-center">
+        Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam ut cursus. <em>Morbi commodo sodales nisi id sodales. Proin consectetur, nisi id commodo imperdiet, metus nunc consequat lectus, id bibendum diam velit et dui.</em> Proin massa magna, vulputate nec bibendum nec, posuere nec lacus. <small>Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla euismod ultrices massa, et feugiat ipsum consequat eu.</small>
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="text-center">
+        Deer
+      </h3>
+      <div id="deerChart">
+      </div>
+      <p class="text-center">
+        Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam ut cursus. <em>Morbi commodo sodales nisi id sodales. Proin consectetur, nisi id commodo imperdiet, metus nunc consequat lectus, id bibendum diam velit et dui.</em> Proin massa magna, vulputate nec bibendum nec, posuere nec lacus. <small>Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla euismod ultrices massa, et feugiat ipsum consequat eu.</small>
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="text-center">
+        Oak Trees
+      </h3>
+      <div id="timeSeries">
+      </div>
+      <p class="text-center">
+        Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam ut cursus. <em>Morbi commodo sodales nisi id sodales. Proin consectetur, nisi id commodo imperdiet, metus nunc consequat lectus, id bibendum diam velit et dui.</em> Proin massa magna, vulputate nec bibendum nec, posuere nec lacus. <small>Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla euismod ultrices massa, et feugiat ipsum consequat eu.</small>
+      </p>
+    </div>
+  </div>
+</div>
   </body>
-</html>
+
+  </html>
