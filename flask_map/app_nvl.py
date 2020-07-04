@@ -4,7 +4,14 @@ from sqlalchemy import create_engine, func
 from flask import Flask, jsonify, render_template
 
 # Connect to Database,
-engine = create_engine('postgresql://postgres:cyclone1@localhost:5432/lymevectoranalysis')
+#engine = create_engine('postgresql://postgres:cyclone1@localhost:5432/lymevectoranalysis')
+
+engine = create_engine('postgresql://hehyvkiqvzdmhq:e0d26d100db3ce0a397229444efb4bbc7ebd9c2d2b56e15477f677f2fe1ece41@ec2-52-0-155-79.compute-1.amazonaws.com/dchplfe6pe6n1h')
+
+# db_host= "ec2-52-0-155-79.compute-1.amazonaws.com"
+# db_name = "dchplfe6pe6n1h"
+# db_user ="hehyvkiqvzdmhq"
+# db_password = "e0d26d100db3ce0a397229444efb4bbc7ebd9c2d2b56e15477f677f2fe1ece41"
 
 app = Flask(__name__)
 

@@ -189,4 +189,8 @@ d3.json(geoData, function (data) {
   // Adding legend to the map
   legend.addTo(myMap);
 
+  //myMap.invalidateSize();
+  window.setTimeout(function() {
+        myMap.invalidateSize();
+    }, 2000);
 });
