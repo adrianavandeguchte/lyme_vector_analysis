@@ -2,12 +2,12 @@
 import sqlalchemy
 from sqlalchemy import create_engine, func
 from flask import Flask, jsonify, render_template
-
+from config import password
 
 app = Flask(__name__)
 
 # Connect to Database,
-engine = create_engine('postgresql://postgres:postgres@localhost:5432/lyme-vector-analysis')
+engine = create_engine(f'postgresql://hehyvkiqvzdmhq:{password}@ec2-52-0-155-79.compute-1.amazonaws.com:5432/dchplfe6pe6n1h')
 
 @app.route("/")
 def home():
