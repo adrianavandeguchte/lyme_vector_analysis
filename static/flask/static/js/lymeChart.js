@@ -1,25 +1,39 @@
 // set the dimensions and margins of the graph
-const width = 960;
-const height = 500;
-const margin = 10;
-const padding = 10;
-const adj = 30;
-// we are appending SVG first
-const svg = d3.select("#lymeChart").append("svg")
-    .attr("preserveAspectRatio", "xMinYMin meet")
-    .attr("viewBox", "-"
-          + adj + " -"
-          + adj + " "
-          + (width + adj *3) + " "
-          + (height + adj*3))
-    .style("padding", padding)
-    .style("margin", margin)
-    .classed("svg-content", true);
+// const width = 960;
+// const height = 500;
+// const margin = 10;
+// const padding = 10;
+// const adj = 30;
+
+// set the dimensions and margins of the graph
+var margin = {top: 10, right: 30, bottom: 30, left: 60}
+    width = 460 - margin.left - margin.right
+    height = 400 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var svg = d3.select("#lymeChart")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+// const svg = d3.select("#lymeChart").append("svg")
+//     .attr("preserveAspectRatio", "xMinYMin meet")
+//     .attr("viewBox", "-"
+//           + adj + " -"
+//           + adj + " "
+//           + (width + adj *3) + " "
+//           + (height + adj*3))
+//     .style("padding", padding)
+//     .style("margin", margin)
+//     .classed("svg-content", true);
 var parseTime = d3.timeParse("%Y");
 
 
 //Read the data
-d3.json("/lymepeople"), function(lyme_people) {
+d3.json("/lymepeople", function(err, lyme_people) {
   console.log(lyme_people);
   // List of groups (here I have one group per column)
       var selection = d3.map(lyme_people, function(d){return(d.county)}).keys()
@@ -41,7 +55,7 @@ d3.json("/lymepeople"), function(lyme_people) {
       var humanData = lyme_people.filter(function(d) {return d.county == selection[0]})
 
     console.log(humanData);
-    d3.json("/lymedogs"), function(lyme_dogs) {
+    d3.json("/lymedogs", function(err, lyme_dogs) {
           // Format the data
           lyme_dogs.forEach(function(d) {
             d.year =  parseTime(d.year);
@@ -137,5 +151,5 @@ d3.json("/lymepeople"), function(lyme_people) {
       // run the updateChart function with this selected option
       update(selectedOption)
     });
-  };
-};
+  });
+});
