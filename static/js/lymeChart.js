@@ -1,6 +1,6 @@
 // set the dimensions and margins of the graph
-const width = 200;
-const height = 100;
+const width = 350;
+const height = 250;
 const margin = 10;
 const padding = 10;
 const adj = 40;
@@ -82,7 +82,8 @@ d3.json("/lymepeople", function (err, lyme_people) {
             })])
             .range([height, 0]);
         svg.append("g")
-            .call(d3.axisLeft(y));
+            .call(d3.axisLeft(y)
+          .ticks(6));
         var line = d3.line()
             .x(function (d) {
                 return x(d.year);
@@ -171,7 +172,7 @@ d3.json("/lymepeople", function (err, lyme_people) {
                 .range([height, 0]);
             svg.append("g")
                 .call(d3.axisLeft(y)
-              .ticks(8));
+              .ticks(6));
             var line = d3.line()
                 .x(function (d) {
                     return x(d.year);

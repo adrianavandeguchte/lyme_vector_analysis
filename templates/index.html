@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
     integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
     crossorigin=""/>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="../static/css/stylesheet.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -48,47 +49,73 @@
       </nav>
       <div class="container-fluid">
           <div class="row">
-              <div class="col-md-12">
-                  <div class="text-center" id="page-title">
-                      <h1>
-                          Lyme Disease of New Jersey
-                          <br>
-                          <small>cases, vectors, reservoirs</small>
-                      </h1>
-                  </div>
-              </div>
-          </div>
-          <div class="row">
-              <div class="col-md-12">
-                  <h3 class="text-center">
-                      Lyme disease in NJ
-                  </h3>
-                  <div class="col-md-4">
-                  <select id="selectButton"></select>
-                  <div id="lymeChart">
-                  </div>
-                  </div>
-                  <div class="col-md-8">
-                  <p class="text-center">
-                      Paragraph of background of what Lyme is and the caustive parasite. <strong>consectetur adipiscing
-                          elit</strong>. Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea
-                      dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et,
-                      pharetra in dolor. Sed iaculis posuere diam ut cursus. <em>Morbi commodo sodales nisi id sodales.
-                          Proin consectetur, nisi id commodo imperdiet, metus nunc consequat lectus, id bibendum diam
-                          velit et dui.</em> Proin massa magna, vulputate nec bibendum nec, posuere nec lacus.
-                      <small>Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla euismod ultrices massa, et
-                          feugiat ipsum consequat eu.</small>
-                  </p>
+            <div class="img-container">
+              <img src="../static/images/princeton-woods.jpg" alt="Princeton" style="width:100%;">
+              <div class="centered">
+                    <h1 id="primary-title"><strong>
+                        Lyme Disease of New Jersey
+                        <br>
+                        <i><small>cases, vectors, reservoirs</small></i></strong>
+                    </h1>
               </div>
             </div>
           </div>
           <div class="row">
+            <div class="col-md-12">
+              <h3 class="text-center">What is Lyme Disease?</h3>
+              <br>
+              <div data-aos="fade-left" data-aos-duration="1000">
+              <div class="col-md-9">
+                <p>Lyme disease is the common term for the disease transmitted by <i>Borrelia burgdorferi</i>, a bacterium whose common vector in North America is the blacklegged or deer tick, <i>Ixodes scapularis</i>.
+                  Lyme disease can affect a variety of species, includes deer, mice, horses, dogs, and humans.
+                </p>
+              </div>
+              </div>
+              <div class="col-md-3">
+                <img alt="B. burgdorferi" src="../static/images/b-burgdorferi.jpg" />
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
               <div class="col-md-12">
                   <h3 class="text-center">
-                      Ticks
+                      Burden of Lyme Disease in New Jersey
                   </h3>
+                  <br>
                   <div class="col-md-6">
-                  <p class="text-center">
+                  <select id="selectButton"></select>
+                  <div id="lymeChart">
+                  </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p data-aos="fade-up-right" data-aos-duration="2000" class="text-center">
+                                Paragraph of background of what Lyme is and the caustive parasite. <strong>consectetur adipiscing
+                                    elit</strong>. Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea
+                                dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et,
+                                pharetra in dolor. Sed iaculis posuere diam ut cursus. <em>Morbi commodo sodales nisi id sodales.
+                                    Proin consectetur, nisi id commodo imperdiet, metus nunc consequat lectus, id bibendum diam
+                                    velit et dui.</em> Proin massa magna, vulputate nec bibendum nec, posuere nec lacus.
+                                <small>Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla euismod ultrices massa, et
+                                    feugiat ipsum consequat eu.</small>
+                            </p>
+                          </div>
+                        </div>
+
+                    </div>
+                  </div>
+              </div>
+          <hr>
+          <div class="row">
+              <div class="col-md-12">
+                  <h3 class="text-center">
+                      The Black-Legged Tick
+                  </h3>
+                  <br>
+                  <div class="col-md-6">
+                  <p data-aos="zoom-in" data-aos-duration="3000" class="text-center">
                     Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien.
                     Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum
                     velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam ut cursus.
@@ -96,14 +123,22 @@
                       consequat lectus, id bibendum diam velit et dui.</em> Proin massa magna, vulputate nec bibendum nec,
                       posuere nec lacus. <small>Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla euismod
                         ultrices massa, et feugiat ipsum consequat eu.</small>
+                      </p>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div data-aos="fade-right" data-aos-duration="1000">
+                            <img alt="B. burgdorferi" class="center-block" src="../static/images/blacklegged-tick_CDC.jpg" />
+                          </div>
+                        </div>
+                      </div>
                   </div>
                   <div class="col-md-6">
                   <div id="map"></div>
                 </div>
               </div>
-              </p>
           </div>
       </div>
+      <hr>
       <div class="row">
           <div class="col-md-12">
               <h3 class="text-center">
@@ -122,6 +157,7 @@
               </p>
           </div>
       </div>
+      <hr>
       <div class="row">
           <div class="col-md-12">
               <h3 class="text-center">
@@ -168,6 +204,10 @@
       </script>
       <script type="text/javascript" src="static/js/logic.js"></script>
       <script src="../static/js/lymeChart.js"></script>
+      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+      <script>
+        AOS.init();
+      </script>
   </body>
 
   </html>
