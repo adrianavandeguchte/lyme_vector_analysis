@@ -9,7 +9,7 @@ var baseLayer = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}
   zoomOffset: -1,
   transparency: 'true',
   id: "mapbox/dark-v10",
-  accessToken: "pk.eyJ1IjoidmFuZGVndWNodGVhIiwiYSI6ImNrYmh1MzNmZTA1M2gydHFwZnVwN3d5dW0ifQ.bXPzvvrPI0X_Vn5ezs7YWg"
+  accessToken: API_KEY
 });
 
 
@@ -148,7 +148,7 @@ d3.json(geoData, function (data) {
   var heatmapLayer = new HeatmapOverlay(cfg);
   var myMap = L.map("map", {
     center: [40.0522, -95.8437],
-    zoom: 5,
+    zoom: 4,
     layers: [baseLayer, stateBoundary, countyBoundary, geojson]
   });
 
@@ -171,7 +171,7 @@ d3.json(geoData, function (data) {
     var labels = [];
 
     // Add min & max
-    var legendInfo = "<h1>Tick Presence</h1>" //+
+    var legendInfo = "<h5>Tick Presence</h5>" //+
     //   "<div class=\"labels\">" +
     //   "<div class=\"min\">No records</div>" +
     //   "<div class=\"max\">Established</div>" +
@@ -183,7 +183,7 @@ d3.json(geoData, function (data) {
       labels.push("<li style=\"background-color: " + colors[index] + "\"></li>");
     });
 
-    div.innerHTML += "<ul>" + labels.join("") + "</ul>";
+    div.innerHTML += "<ul><center>" + labels.join("") + "</center></ul>";
     return div;
   };
 
