@@ -37,12 +37,12 @@
 /* LINE CHART */
 path.line-0 {
 fill: none;
-stroke: deepskyblue;
+stroke: lime;
 stroke-width: 3;
 }
 path.line-1 {
 fill: none;
-stroke: #ed3700;
+stroke: olivedrab;
 stroke-width: 3;
 }
 .serie_label {

@@ -1,6 +1,6 @@
 // set the dimensions and margins of the graph
-const width = 200;
-const height = 100;
+const width = 350;
+const height = 250;
 const margin = 10;
 const padding = 10;
 const adj = 40;
