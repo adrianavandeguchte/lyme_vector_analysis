@@ -5,7 +5,7 @@ const margin = 10;
 const padding = 10;
 const adj = 30;
 
-const svg = d3.select("#lymeChart").append("svg")
+var svg = d3.select("#lymeChart").append("svg")
     // .attr("preserveAspectRatio", "xMinYMin meet")
     .attr("viewBox", "-"
           + adj + " -"
@@ -14,13 +14,12 @@ const svg = d3.select("#lymeChart").append("svg")
           + (height + adj*3))
     .style("padding", padding)
     .style("margin", margin)
-    .classed("svg-content", true);
+    .classed("svg-content lymeChart-canvas", true);
 
 var parseTime = d3.timeParse("%Y");
 
 //Read the data
 d3.json("/lymepeople", function (err, lyme_people) {
-    console.log(lyme_people);
     // List of groups (here I have one group per column)
     var selection = d3.map(lyme_people, function (d) {
         return (d.county)
@@ -48,14 +47,12 @@ d3.json("/lymepeople", function (err, lyme_people) {
         return d.county == selection[0]
     })
 
-    console.log(humanData);
     d3.json("/lymedogs", function (err, lyme_dogs) {
         // Format the data
         lyme_dogs.forEach(function (d) {
             d.year = parseTime(d.year);
             d.cases = +d.positive_cases;
         });
-        console.log(lyme_dogs);
         // Filtering to the correct selection:
         var dogs = lyme_dogs.filter(function (d) {
             return d.county == selection[0]
@@ -68,7 +65,6 @@ d3.json("/lymepeople", function (err, lyme_people) {
             set: "Canine",
             values: dogs
         }]
-        console.log("bothSets", bothSets);
         // Add X axis --> it is a date format
         var x = d3.scaleTime()
             .domain(d3.extent(dogs, function (d) {
@@ -128,6 +124,7 @@ d3.json("/lymepeople", function (err, lyme_people) {
 
         // sets up update functions
         function update(selected) {
+          // applies new filter to data and builds new updatedSets
             dogUpdate = lyme_dogs.filter(function (d) {
                 return d.county == selected
             })
@@ -142,20 +139,33 @@ d3.json("/lymepeople", function (err, lyme_people) {
                 set: "Canine",
                 values: dogUpdate
             }]
-            console.log("updatedSets", updatedSets);
-            var line = d3.line()
-                .x(function (d) {
-                    console.log(x(d.year))
-                    return x(d.year);
-                })
-                .y(function (d) {
-                    console.log(y(d.cases))
-                    return y(d.cases);
-                })
+            // clears svg canvas
+            d3.selectAll(".lymeChart-canvas").remove();
+            // rebuilds svg canvas
+            var svg = d3.select("#lymeChart").append("svg")
+                // .attr("preserveAspectRatio", "xMinYMin meet")
+                .attr("viewBox", "-"
+                      + adj + " -"
+                      + adj + " "
+                      + (width + adj *3) + " "
+                      + (height + adj*3))
+                .style("padding", padding)
+                .style("margin", margin)
+                .classed("svg-content lymeChart-canvas", true);
+            // sets new x axis
+            var x = d3.scaleTime()
+                .domain(d3.extent(dogUpdate, function (d) {
+                   return d.year;
+                }))
+                .range([0, width]);
+            svg.append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x));
 
-            // reset Y axis
+
+            // sets new Y axis
             var y = d3.scaleLinear()
-                .domain([0, d3.max(dogs, function (d) {
+                .domain([0, d3.max(dogUpdate, function (d) {
                     return +d.cases;
                 })])
                 .range([height, 0]);
@@ -173,33 +183,26 @@ d3.json("/lymepeople", function (err, lyme_people) {
                 return "line-" + id++;
             }
 
-            // reset lines
-            lines = svg.selectAll("lines")
-                .data(updatedSets)
-                .enter()
-                .append("g");
+            // sets new lines
+            var lines = svg.selectAll("lines")
+                    .data(updatedSets)
+                    .enter()
+                    .append("g");
 
-            lines.append("path")
-                .attr("class", ids)
-                .attr("d", function (d) {
-                    return line(d.values);
-                });
-            lines.append("text")
-                .attr("class", "serie_label")
-                .datum(function (d) {
-                    return {
-                        set: d.set,
-                        value: d.values[d.values.length - 1]
-                    };
-                })
-                .attr("transform", function (d) {
-                    return "translate(" + (x(d.value.year) + 10) +
-                        "," + (y(d.value.cases) + 5) + ")";
-                })
-                .attr("x", 5)
-                .text(function (d) {
-                    return d.set;
-                });
+                    lines.append("path")
+                    .attr("class", ids)
+                    .attr("d", function(d) { return line(d.values); });
+                    lines.append("text")
+                      .attr("class","serie_label")
+                      .datum(function(d) {
+                          return {
+                              set: d.set,
+                              value: d.values[d.values.length - 1]}; })
+                      .attr("transform", function(d) {
+                              return "translate(" + (x(d.value.year) + 10)
+                              + "," + (y(d.value.cases) + 5 ) + ")";})
+                      .attr("x", 5)
+                      .text(function(d) { return d.set; });
 
         }
         // When the button is changed, run the updateChart function
