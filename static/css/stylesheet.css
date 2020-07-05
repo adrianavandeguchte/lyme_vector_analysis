@@ -1,17 +1,48 @@
+* {
+  font-family: "Times New Roman", Times, serif;
+}
+
+
+#primary-title {
+  font-size: 300%;
+}
 /* website styling */
 #page-title {
   margin-top: 80px;
 }
 
+.prevent-page {
+  margin:30px;
+  padding:25px;
+}
+
+#sec-head {
+  text-align: center;
+}
+
+/* Container holding the image and the text */
+.img-container {
+  position: relative;
+  margin-top: 50px;
+  text-align: center;
+  color: white;
+}
+/* Centered text */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 /* LINE CHART */
 path.line-0 {
 fill: none;
-stroke: #ed3700;
+stroke: deepskyblue;
 stroke-width: 3;
 }
 path.line-1 {
 fill: none;
-stroke: deepskyblue;
+stroke: #ed3700;
 stroke-width: 3;
 }
 .serie_label {

@@ -82,7 +82,8 @@ d3.json("/lymepeople", function (err, lyme_people) {
             })])
             .range([height, 0]);
         svg.append("g")
-            .call(d3.axisLeft(y));
+            .call(d3.axisLeft(y)
+          .ticks(6));
         var line = d3.line()
             .x(function (d) {
                 return x(d.year);
@@ -171,7 +172,7 @@ d3.json("/lymepeople", function (err, lyme_people) {
                 .range([height, 0]);
             svg.append("g")
                 .call(d3.axisLeft(y)
-              .ticks(8));
+              .ticks(6));
             var line = d3.line()
                 .x(function (d) {
                     return x(d.year);
