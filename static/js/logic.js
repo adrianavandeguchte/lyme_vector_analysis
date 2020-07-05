@@ -9,11 +9,19 @@ var baseLayer = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}
   zoomOffset: -1,
   transparency: 'true',
   id: "mapbox/dark-v10",
-  accessToken: API_KEY
+  accessToken: "pk.eyJ1IjoidmFuZGVndWNodGVhIiwiYSI6ImNrYmh1MzNmZTA1M2gydHFwZnVwN3d5dW0ifQ.bXPzvvrPI0X_Vn5ezs7YWg"
 });
 
+
+var tick_data = data[0];
+var lyme_data = data[1];
+
+// console.log(tick_data);
+//console.log(lyme_data);
+
 var stateBoundary;
-var geoData = "static/data/gz_2010_us_040_00_20m.geojson";
+//var geoData = "static/data/gz_2010_us_040_00_20m.geojson";
+var geoData = "static/Resources/geoData/gz_2010_us_040_00_20m.geojson";
 d3.json(geoData, function (data) {
   stateBoundary = L.geoJSON(data.features, {
     style: { color: "#fff", fillOpacity: 0.0 }
@@ -21,14 +29,15 @@ d3.json(geoData, function (data) {
 });
 
 var countyBoundary;
-var geoData = "static/data/gz_2010_us_050_00_20m.geojson";
+//var geoData = "static/data/gz_2010_us_050_00_20m.geojson";
+var geoData = "static/Resources/geoData/gz_2010_us_050_00_20m.geojson";
 d3.json(geoData, function (data) {
   countyBoundary = L.geoJSON(data.features, {
     style: { color: "#fff", weight: 0.5, fillOpacity: 0.0 }
   });
 });
 // Load in geojson data
-var geoData = "static/data/gz_2010_us_050_00_20m.geojson";
+var geoData = "static/Resources/geoData/gz_2010_us_050_00_20m.geojson";
 var locations = [];
 
 d3.json(geoData, function (data) {
@@ -57,7 +66,7 @@ d3.json(geoData, function (data) {
     }
 
 
-    fip = parseInt(data.features[i].properties.STATE) + "00" + parseInt(data.features[i].properties.COUNTY);
+    fip = parseInt(data.features[i].properties.STATE) + data.features[i].properties.COUNTY;
     for (var j = 0; j < lyme_data.loc.length; j++) {
       if (lyme_data.loc[j][0] == fip) {
         data.features[i].properties.LYME_CASES = lyme_data.loc[j][1];
@@ -84,7 +93,7 @@ d3.json(geoData, function (data) {
     max: maxCount,
     data: locations
   };
-  console.log(heatdata);
+  //console.log(heatdata);
 
   var geojson;
 
@@ -96,8 +105,6 @@ d3.json(geoData, function (data) {
 
     // Set color scale
     scale: ["#ffffb2", "#b10026"],
-    //scale: ["#ffffff", "#ffffb2"],
-    //scale: ["#ffdb99", "#4d3200"],
     // Number of breaks in step range
     steps: 3,
 
@@ -143,8 +150,6 @@ d3.json(geoData, function (data) {
     center: [40.0522, -95.8437],
     zoom: 5,
     layers: [baseLayer, stateBoundary, countyBoundary, geojson]
-    //layers: [baseLayer, stateBoundary, countyBoundary, geojson, heatmapLayer]
-    //layers: [baseLayer, stateBoundary, countyBoundary,  heatmapLayer]
   });
 
   heatmapLayer.setData(heatdata);
@@ -155,7 +160,7 @@ d3.json(geoData, function (data) {
   };
 
   // Create a control for our layers, add our overlay layers to it
-  L.control.layers(null, overlays, { collapsed: false }).addTo(myMap);
+  L.control.layers(overlays, null, { collapsed: false }).addTo(myMap);
 
   // Set up the legend
   var legend = L.control({ position: "bottomright" });
@@ -185,4 +190,8 @@ d3.json(geoData, function (data) {
   // Adding legend to the map
   legend.addTo(myMap);
 
+  //myMap.invalidateSize();
+  window.setTimeout(function() {
+        myMap.invalidateSize();
+    }, 2000);
 });

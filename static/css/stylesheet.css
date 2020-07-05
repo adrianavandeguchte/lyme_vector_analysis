@@ -7,10 +7,12 @@
 path.line-0 {
 fill: none;
 stroke: #ed3700;
+stroke-width: 3;
 }
 path.line-1 {
 fill: none;
-stroke: #2b2929;
+stroke: deepskyblue;
+stroke-width: 3;
 }
 .serie_label {
 fill: #2b2929;
@@ -26,23 +28,26 @@ shape-rendering: crispEdges;
 /* axis contour */
 .axis path {
 stroke: #706f6f;
-stroke-width: 0.7;
+stroke-width: 0.4;
 shape-rendering: crispEdges;
 }
 /* axis text */
 .axis text {
 fill: #2b2929;
 font-family: Georgia;
-font-size: 120%;
+font-size: 50%;
 }
 
+.lymeChart-canvas {
+
+}
 
 /* choropleth css*/
 
 #map,
 body,
 html {
-  height: 100%;
+  height: 600px;
 }
 
 .leaflet-popup-content {
