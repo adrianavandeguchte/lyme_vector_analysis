@@ -23,19 +23,35 @@ def dbConnection(db_host,db_name,db_user,db_password):
     else:
         print("DB Connection was successfully established")
 
-#Establish DB connection - All parameters are available as environment variables
-conn = dbConnection(db_host,db_name,db_user,db_password)        
+     
 
 #Function purpose: Get deer population and lyme case count
 #Return the JSON representation of your dictionary.
 def fDeerpopLymeCount():
     try:
+        #Establish DB connection - All parameters are available as environment variables
+        conn = dbConnection(db_host,db_name,db_user,db_password)   
         cur = conn.cursor()
-        cur.execute("""select * from deerpopcounty""")
+        cur.execute('SELECT * FROM  "public"."deerpopcounty"')
         data = [col for col in cur]
         cur.close()
         print(data)
         conn.close()
         return jsonify(data)
     except:
-        print("Failed to get database result for Salary table.")
+        print("Failed to get database result for deerpopcounty table.")
+
+def fHarvestLymeCount():
+    try:
+        #Establish DB connection - All parameters are available as environment variables
+        conn = dbConnection(db_host,db_name,db_user,db_password)   
+        cur = conn.cursor()
+        cur.execute('SELECT * FROM  "public"."lymeHarvest"')
+       
+        data = [col for col in cur]
+        cur.close()
+        print(data)
+        conn.close()
+        return jsonify(data)
+    except:
+        print("Failed to get database result for lymeHarvest table.")

@@ -13,10 +13,14 @@ def not_found(e):
 
 #Define routes - this is used for assignment purpose to show output in JSON format
 @app.route("/")
-@app.route("/api/v1.0/")
-def homepage():
-    #Defsult page that lists all API and corresponding URL
+@app.route("/popLyme")
+def popLyme():
     return render_template("popLyme.html", title="Lyme Vecrtoe Analysis") 
+
+@app.route("/lymeHarvestCount")
+def lymeHarvestCount():
+    #return render_template("popLyme.html", title="Lyme Harvest Analysis") 
+    return render_template("lymeHarvest.html", title="Lyme Harvest Analysis") 
 
 @app.route("/api/v1.0/deerpopLyme") 
 def deerpopLyme():
@@ -25,6 +29,14 @@ def deerpopLyme():
     print(deerLymen_dict)
     #Return json output
     return deerLymen_dict
+
+@app.route("/api/v1.0/deerHarvestLyme") 
+def deerHarvestLyme():
+    #Get deer harvested Lyme results
+    harLymen_dict = fHarvestLymeCount()
+    print(harLymen_dict)
+    #Return json output
+    return harLymen_dict
 
 #Application set to debug mode - update debug flag = Flase once testing is done
 if __name__ == '__main__':

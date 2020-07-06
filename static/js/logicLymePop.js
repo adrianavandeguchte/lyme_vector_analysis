@@ -1,11 +1,12 @@
 //Data URL
-url="Resources/summaryData/deerpop_lyme_2018.csv"
+const url ="http://127.0.0.1:5000/api/v1.0/deerpopLyme"
+//const url = "ec2-52-0-155-79.compute-1.amazonaws.com:5000/api/v1.0/deerpopLyme"
 
 //Set canvas size
 var svgWidth = 960;
 var svgHeight = 800;
 
-//Set up svg chartMargins
+//Set up svg2 chartMargins
 var margin = {
     top: 20,
     right: 20,
@@ -17,225 +18,132 @@ var margin = {
 var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
 
-// set the dimensions and margins of the graph
-var margin = {top: 40, right: 150, bottom: 60, left: 30},
-    width = 500 - margin.left - margin.right,
-    height = 420 - margin.top - margin.bottom;
-
-//append the svg object to the body of the page
-var svg = d3.select("#my_chart")
-  .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
-
 //Append chart area to canvas
-// const svg = d3.select('#my_chart').append('svg')
-//     .attr('width', svgWidth)
-//     .attr('height', svgHeight);
+const svg2 = d3.select('#my_chart')
+    .append('svg2')
+    .attr('width', svgWidth)
+    .attr('height', svgHeight);
+
+//Append chart group 
+var chartGroup = svg2.append('g')
+    .attr('transform', `translate(${margin.left}, ${margin.top})`);
+
+//Function  x-scale  
+function xScale(data) {
+  //Create scales
+  var xLinearScale = d3.scaleLinear()
+    .domain([d3.min(data, d => d[4])*.9, d3.max(data, d => d[4])*1.1 ])
+    .range([0, width]);
+
+  return xLinearScale;
+}
+
+//Function y-scale  
+function yScale(data) {
+    //Create scales
+    var yLinearScale = d3.scaleLinear()
+      .domain([d3.min(data, d => d[5])*0.9, d3.max(data, d => d[5])*1.1])
+      .range([height, 0]);
+  
+    return yLinearScale;
+  }
     
+ //Function - Update Tooltip  
+function updateToolTip(circlesGroup) {
+
+  var toolTip = d3.tip()
+    .attr("class", "d3-tip")
+    .offset([80, -60])
+    .html(function(d) {
+      return (`County:  ${d[2]} <br>Total Sq Miles: ${d[3]} <br>Deer Population/Sq Mile: ${d[4]} <br>Lyme Cases: ${d[5]}`);
+    });
+
+  circlesGroup.call(toolTip);
+
+  //Tooltip show - onmouseover event
+  circlesGroup.on("mouseover", function(data) {
+      toolTip.show(data);
+     })
+
+    //Tooltip hide - onmouseout event
+    .on("mouseout", function(data, index) {
+      toolTip.hide(data);
+    });
+
+  return circlesGroup;
+}
 
 //Read the data
-d3.csv(url, function(data) {
+d3.json(url,function(data) {
 
-    console.log(url);
-    console.log(data);
-
-  // --------------  AXIS  AND SCALE   -----------------//
-
-  // Add X axis
-  var x = d3.scaleLinear()
-    .domain([0, 200])
-    .range([ 0, width ]);
-  svg.append("g")
-    .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x).ticks(3));
-
-  // Add X axis label:
-  svg.append("text")
-      .attr("text-anchor", "end")
-      .attr("x", width)
-      .attr("y", height+50 )
-      .text("Deer Population per Square Mile");
-
-  // Add Y axis
-  var y = d3.scaleLinear()
-    .domain([50, 250])
-    .range([ height, 0]);
-  svg.append("g")
-    .call(d3.axisLeft(y));
-
-  // Add Y axis label:
-  svg.append("text")
-      .attr("text-anchor", "end")
-      .attr("x", 0)
-      .attr("y", -20 )
-      .text("Lyme Case Count")
-      .attr("text-anchor", "start")
-
-  // Add a scale for bubble size
-  var z = d3.scaleLinear() //.scaleSqrt()
-    .domain([50, 600])
-    .range([2, 30]);
+  console.log(data)
 
   // Add a scale for bubble color
   var myColor = d3.scaleOrdinal()
     .domain(["Atlantic", "Cumberland", "Mercer", "Passaic","Somerset","Warren"])
     .range(d3.schemeSet1);
+ 
+  //1: Create Scales
+    // xLinearScale function  
+    var xLinearScale = xScale(data);
 
+    // yLinearScale function  
+    var yLinearScale = yScale(data) ;
 
-  // ------------  TOOLTIP  ------------------//
+  // 2: Create axis functions
+    var bottomAxis = d3.axisBottom(xLinearScale);
+    var leftAxis = d3.axisLeft(yLinearScale);
 
-  // -1- Create a tooltip div that is hidden by default:
-  var tooltip = d3.select("#my_chart")
-    .append("div")
-      .style("opacity", 0)
-      .attr("class", "tooltip")
-      .style("background-color", "black")
-      .style("border-radius", "5px")
-      .style("padding", "10px")
-      .style("color", "white")
+  // 3: Append Axes to Chart
+    // append x axis
+    var xAxis = chartGroup.append('g')
+        .attr('transform', `translate(0, ${height})`)
+        .call(bottomAxis);
 
-  // -2- Create 3 functions to show / update (when mouse move but stay on same circle) / hide the tooltip
-  var showTooltip = function(d) {
-    console.log(d)
+    // append y axis
+    var yAxis = chartGroup.append('g')
+        .attr("id", "y-axis")
+        .call(leftAxis);
 
-    tooltip
-      .transition()
-      .duration(200)
-    tooltip
-      .style("opacity", 1)
-      .html("County: " + d.county + "<br>Total Sq Miles: " + d.sq_mile + "<br>Deer Population/Sq Mile: " + d.deer_pop + "<br>Lyme Cases: " + d.lyme_cases)
-      .style("left", (d3.deer_pop)+ "px")//mouse(this)[0]+30) + "px")
-      .style("top", (d3.lyme_cases) + "px")//.mouse(this)[1]+30) + "px")
-    //   .style("left", (d3.mouse(this)[0]+30) + "px")
-    //   .style("top", (d3.mouse(this)[1]+30) + "px")
-  }
-  var moveTooltip = function(d) {
-    tooltip
-      .style("left", (d3.deer_pop)+ "px")//mouse(this)[0]+30) + "px")
-      .style("top", (d3.lyme_cases) + "px")//.mouse(this)[1]+30) + "px")
-  }
-  var hideTooltip = function(d) {
-    tooltip
-      .transition()
-      .duration(200)
-      .style("opacity", 0)
-  }
+    // 4: Create Circles  
 
+    var circlesGroup = chartGroup.selectAll('circle')
+        .data(data)
+        .enter()
+        .append('circle')
+        .attr('cx', d => xLinearScale(d[4]))
+        .attr('cy', d => yLinearScale(d[5]))
+        .attr("r", function (d) { return d[3]*.15; } )
+        .style("fill", function (d) { return myColor(d[2]); } )
+        .attr("opacity", ".6");
 
-  // ---------------   HIGHLIGHT GROUP -----------------//
+  // 4: Create Axes Labels
 
-  // What to do when one group is hovered
-  var highlight = function(d){
-    // reduce opacity of all groups
-    d3.selectAll(".bubbles").style("opacity", .05)
-    // expect the one that is hovered
-    d3.selectAll("."+d).style("opacity", 1)
-  }
+      // Create group for  x-axis labels
+      var xlabelsGroup = chartGroup.append("g")
+          .attr("transform", `translate(${width / 2}, ${height + 20})`);
+      
+      // Create group for  y-axis labels
+      var ylabelsGroup = chartGroup.append("g")
+          .attr("transform", `translate(${width / 2}, ${height + 40})`);
+      
+      //Create x-axis lables and define position
+      var deerCountLabel = xlabelsGroup.append("text")
+          .attr("x", 0)
+          .attr("y", 30)
+          .attr("value", "deerCount") // value to grab for event listener
+          .classed("active", true)
+          .text("Deer Count per Square Mile");
 
-  // And when it is not hovered anymore
-  var noHighlight = function(d){
-    d3.selectAll(".bubbles").style("opacity", 1)
-  }
+      //Create y-axis lables and define position
+      var lymeCountLabel = ylabelsGroup.append("text")
+          .attr("transform", "rotate(-90)")
+          .attr("x", 0 - (width/2) + 700)
+          .attr("y", 0 - (height / 2)-110)
+          .attr("value", "lymeCount") // value to grab for event listener
+          .classed("active", true)
+          .text("Lyme Case Count");
 
-
-  // ---------------   CIRCLES   ----------------//
-
-  // Add dots
-  svg.append('g')
-    .selectAll("dot")
-    .data(data)
-    .enter()
-    .append("circle")
-      .attr("class", function(d) { return "bubbles " + d.county })
-      .attr("cx", function (d) { return d.deer_pop; } )
-      .attr("cy", function (d) { return d.lyme_cases; } )
-      .attr("r", function (d) { return z(d.sq_mile); } )
-      .style("fill", function (d) { return myColor(d.county); } )
-    // -3- Trigger the functions for hover
-    .on("mouseover", showTooltip )
-    .on("mousemove", moveTooltip )
-    .on("mouseleave", hideTooltip )
-
-
-
-    // -------------    LEGEND   ---------------//
-
-    // Add legend: circles
-    var valuesToShow = [100, 150, 250]
-    var xCircle = 390
-    var xLabel = 440
-    svg
-      .selectAll("legend")
-      .data(valuesToShow)
-      .enter()
-      .append("circle")
-        .attr("cx", xCircle)
-        .attr("cy", function(d){ return height - 70 - z(d) } )
-        .attr("r", function(d){ return z(d) })
-        .style("fill", "none")
-        .attr("stroke", "black")
-
-    // Add legend: segments
-    svg
-      .selectAll("legend")
-      .data(valuesToShow)
-      .enter()
-      .append("line")
-        .attr('x1', function(d){ return xCircle + z(d) } )
-        .attr('x2', xLabel)
-        .attr('y1', function(d){ return height - 70 - z(d) } )
-        .attr('y2', function(d){ return height - 70 - z(d) } )
-        .attr('stroke', 'black')
-        .style('stroke-dasharray', ('2,2'))
-
-    // Add legend: labels
-    svg
-      .selectAll("legend")
-      .data(valuesToShow)
-      .enter()
-      .append("text")
-        .attr('x', xLabel)
-        .attr('y', function(d){ return height - 70 - z(d) } )
-        .text( function(d){ return d } )
-        .style("font-size", 10)
-        .attr('alignment-baseline', 'middle')
-
-    // Legend title
-    svg.append("text")
-      .attr('x', xCircle)
-      .attr("y", height - 100 +50)
-      .text("Deer Population")
-      .attr("text-anchor", "middle")
-
-    // Add one dot in the legend for each name.
-    var size = 20
-    var allgroups = ["Atlantic", "Cumberland", "Mercer", "Passaic","Somerset","Warren"]
-    svg.selectAll("myrect")
-      .data(allgroups)
-      .enter()
-      .append("circle")
-        .attr("cx", 390)
-        .attr("cy", function(d,i){ return 10 + i*(size+5)}) // 100 is where the first dot appears. 25 is the distance between dots
-        .attr("r", 10)
-        .style("fill", function(d){ return myColor(d)})
-        .on("mouseover", highlight)
-        .on("mouseleave", noHighlight)
-
-    // Add labels beside legend dots
-    svg.selectAll("mylabels")
-      .data(allgroups)
-      .enter()
-      .append("text")
-      .attr("x", 390 + size*.8)
-      .attr("y", function(d,i){ return i * (size + 5) + (size/2)}) // 100 is where the first dot appears. 25 is the distance between dots
-      .style("fill", function(d){ return myColor(d)})
-      .text(function(d){ return d})
-      .attr("text-anchor", "left")
-      .style("alignment-baseline", "middle")
-      .on("mouseover", highlight)
-      .on("mouseleave", noHighlight)
-  })
+    // 5. UpdateToolTip function above csv import
+      circlesGroup = updateToolTip(circlesGroup);
+  });
