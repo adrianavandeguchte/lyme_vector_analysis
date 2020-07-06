@@ -5,7 +5,7 @@ var margin = 10;
 var padding = 10;
 var adj = 40;
 
-var svg1 = d3.select("#svg1")
+var svg1 = d3.select("#lymeChart").append("svg")
     // .attr("preserveAspectRatio", "xMinYMin meet")
     .attr("viewBox", "-"
           + adj + " -"
@@ -143,7 +143,7 @@ d3.json("/lymepeople", function (err, lyme_people) {
             // clears svg1 canvas
             d3.selectAll(".lymeChart-canvas").remove();
             // rebuilds svg1 canvas
-            var svg1 = d3.select("#lymeChart").append("svg1")
+            var svg1 = d3.select("#lymeChart").append("svg")
                 // .attr("preserveAspectRatio", "xMinYMin meet")
                 .attr("viewBox", "-"
                       + adj + " -"
