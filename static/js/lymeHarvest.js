@@ -1,21 +1,21 @@
 //Data url
-const url ="http://127.0.0.1:5000/api/v1.0/deerHarvestLyme"
+var url ="http://127.0.0.1:5000/api/v1.0/deerHarvestLyme"
 //const url = "ec2-52-0-155-79.compute-1.amazonaws.com:5000/api/v1.0/deerHarvestLyme"
 
 // The code for the chart is wrapped inside a function that automatically resizes the chart
 function makeResponsive() {
 
-// if the svg2 area isn't empty when the browser loads, remove it and replace it with a resized version of the chart
-  var svgArea = d3.select("body").select("svg2");
-
-  // clear svg2 is not empty
-  if (!svgArea.empty()) {
-    svgArea.remove();
-  }
+// // if the svg2 area isn't empty when the browser loads, remove it and replace it with a resized version of the chart
+//   var svgArea = d3.select("body").select("#svg3");
+//
+//   // clear svg2 is not empty
+//   if (!svgArea.empty()) {
+//     svgArea.remove();
+//   }
 
 // Chart Params
-var svgWidth = 960;
-var svgHeight = 500;
+var svgWidth = 350;
+var svgHeight = 250;
 var circleRadius =7;
 var formatComma = d3.format(",")
 
@@ -28,8 +28,8 @@ var height = svgHeight - margin.top - margin.bottom;
 
 // Create an svg2 wrapper, append an svg2 group that will hold our chart, and shift the latter by left and top margins.
 var svg2 = d3
-  .select("body")
-  .append("svg2")
+  .select("#svg3")
+  .append("svg")
   .attr("width", svgWidth)
   .attr("height", svgHeight);
 
@@ -120,7 +120,7 @@ console.log(deerData)
     .attr("r", circleRadius)
     .attr("fill", "yellowgreen")
     .attr("stroke-width", "1")
-    .attr("stroke", "black"); 
+    .attr("stroke", "black");
 
     // append circles for lyme case count
     var circlesGroup1 =chartGroup.selectAll("circle1")
@@ -132,7 +132,7 @@ console.log(deerData)
     .attr("r", circleRadius)
     .attr("fill", "orange")
     .attr("stroke-width", "1")
-    .attr("stroke", "black");     
+    .attr("stroke", "black");
 
   // Append axes titles
   chartGroup.append("text")
