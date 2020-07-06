@@ -1,11 +1,11 @@
 // set the dimensions and margins of the graph
-const width = 350;
-const height = 250;
-const margin = 10;
-const padding = 10;
-const adj = 40;
+var width = 350;
+var height = 250;
+var margin = 10;
+var padding = 10;
+var adj = 40;
 
-var svg = d3.select("#lymeChart").append("svg")
+var svg1 = d3.select("#svg1")
     // .attr("preserveAspectRatio", "xMinYMin meet")
     .attr("viewBox", "-"
           + adj + " -"
@@ -14,7 +14,7 @@ var svg = d3.select("#lymeChart").append("svg")
           + (height + adj*3))
     .style("padding", padding)
     .style("margin", margin)
-    .classed("svg-content lymeChart-canvas", true);
+    .classed("svg1-content lymeChart-canvas", true);
 
 var parseTime = d3.timeParse("%Y");
 
@@ -71,7 +71,7 @@ d3.json("/lymepeople", function (err, lyme_people) {
                 return d.year;
             }))
             .range([0, width]);
-        svg.append("g")
+        svg1.append("g")
             .attr("transform", "translate(0," + height + ")")
             .call(d3.axisBottom(x));
 
@@ -81,7 +81,7 @@ d3.json("/lymepeople", function (err, lyme_people) {
                 return +d.cases;
             })])
             .range([height, 0]);
-        svg.append("g")
+        svg1.append("g")
             .call(d3.axisLeft(y)
           .ticks(6));
         var line = d3.line()
@@ -96,7 +96,7 @@ d3.json("/lymepeople", function (err, lyme_people) {
             return "line-" + id++;
         }
         // Add the line
-        var lines = svg.selectAll("lines")
+        var lines = svg1.selectAll("lines")
             .data(bothSets)
             .enter()
             .append("g");
@@ -140,10 +140,10 @@ d3.json("/lymepeople", function (err, lyme_people) {
                 set: "Canine",
                 values: dogUpdate
             }]
-            // clears svg canvas
+            // clears svg1 canvas
             d3.selectAll(".lymeChart-canvas").remove();
-            // rebuilds svg canvas
-            var svg = d3.select("#lymeChart").append("svg")
+            // rebuilds svg1 canvas
+            var svg1 = d3.select("#lymeChart").append("svg1")
                 // .attr("preserveAspectRatio", "xMinYMin meet")
                 .attr("viewBox", "-"
                       + adj + " -"
@@ -152,14 +152,14 @@ d3.json("/lymepeople", function (err, lyme_people) {
                       + (height + adj*3))
                 .style("padding", padding)
                 .style("margin", margin)
-                .classed("svg-content lymeChart-canvas", true);
+                .classed("svg1-content lymeChart-canvas", true);
             // sets new x axis
             var x = d3.scaleTime()
                 .domain(d3.extent(dogUpdate, function (d) {
                    return d.year;
                 }))
                 .range([0, width]);
-            svg.append("g")
+            svg1.append("g")
                 .attr("transform", "translate(0," + height + ")")
                 .call(d3.axisBottom(x));
 
@@ -170,7 +170,7 @@ d3.json("/lymepeople", function (err, lyme_people) {
                     return +d.cases;
                 })])
                 .range([height, 0]);
-            svg.append("g")
+            svg1.append("g")
                 .call(d3.axisLeft(y)
               .ticks(6));
             var line = d3.line()
@@ -186,7 +186,7 @@ d3.json("/lymepeople", function (err, lyme_people) {
             }
 
             // sets new lines
-            var lines = svg.selectAll("lines")
+            var lines = svg1.selectAll("lines")
                     .data(updatedSets)
                     .enter()
                     .append("g");

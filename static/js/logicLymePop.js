@@ -2,10 +2,10 @@
 url="Resources/summaryData/deerpop_lyme_2018.csv"
 
 //Set canvas size
-var svgWidth = 960;
-var svgHeight = 800;
+var svg2Width = 960;
+var svg2Height = 800;
 
-//Set up svg chartMargins
+//Set up svg2 chartMargins
 var margin = {
     top: 20,
     right: 20,
@@ -14,17 +14,16 @@ var margin = {
 };
 
 //Calculcate chart width/height
-var width = svgWidth - margin.left - margin.right;
-var height = svgHeight - margin.top - margin.bottom;
+var width = svg2Width - margin.left - margin.right;
+var height = svg2Height - margin.top - margin.bottom;
 
 // set the dimensions and margins of the graph
 var margin = {top: 40, right: 150, bottom: 60, left: 30},
     width = 500 - margin.left - margin.right,
     height = 420 - margin.top - margin.bottom;
 
-//append the svg object to the body of the page
-var svg = d3.select("#my_chart")
-  .append("svg")
+//append the svg2 object to the body of the page
+var svg2 = d3.select("#svg2")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
@@ -32,10 +31,10 @@ var svg = d3.select("#my_chart")
           "translate(" + margin.left + "," + margin.top + ")");
 
 //Append chart area to canvas
-// const svg = d3.select('#my_chart').append('svg')
-//     .attr('width', svgWidth)
-//     .attr('height', svgHeight);
-    
+// const svg2 = d3.select('#my_chart').append('svg2')
+//     .attr('width', svg2Width)
+//     .attr('height', svg2Height);
+
 
 //Read the data
 d3.csv(url, function(data) {
@@ -49,12 +48,12 @@ d3.csv(url, function(data) {
   var x = d3.scaleLinear()
     .domain([0, 200])
     .range([ 0, width ]);
-  svg.append("g")
+  svg2.append("g")
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(x).ticks(3));
 
   // Add X axis label:
-  svg.append("text")
+  svg2.append("text")
       .attr("text-anchor", "end")
       .attr("x", width)
       .attr("y", height+50 )
@@ -64,11 +63,11 @@ d3.csv(url, function(data) {
   var y = d3.scaleLinear()
     .domain([50, 250])
     .range([ height, 0]);
-  svg.append("g")
+  svg2.append("g")
     .call(d3.axisLeft(y));
 
   // Add Y axis label:
-  svg.append("text")
+  svg2.append("text")
       .attr("text-anchor", "end")
       .attr("x", 0)
       .attr("y", -20 )
@@ -145,7 +144,7 @@ d3.csv(url, function(data) {
   // ---------------   CIRCLES   ----------------//
 
   // Add dots
-  svg.append('g')
+  svg2.append('g')
     .selectAll("dot")
     .data(data)
     .enter()
@@ -168,7 +167,7 @@ d3.csv(url, function(data) {
     var valuesToShow = [100, 150, 250]
     var xCircle = 390
     var xLabel = 440
-    svg
+    svg2
       .selectAll("legend")
       .data(valuesToShow)
       .enter()
@@ -180,7 +179,7 @@ d3.csv(url, function(data) {
         .attr("stroke", "black")
 
     // Add legend: segments
-    svg
+    svg2
       .selectAll("legend")
       .data(valuesToShow)
       .enter()
@@ -193,7 +192,7 @@ d3.csv(url, function(data) {
         .style('stroke-dasharray', ('2,2'))
 
     // Add legend: labels
-    svg
+    svg2
       .selectAll("legend")
       .data(valuesToShow)
       .enter()
@@ -205,7 +204,7 @@ d3.csv(url, function(data) {
         .attr('alignment-baseline', 'middle')
 
     // Legend title
-    svg.append("text")
+    svg2.append("text")
       .attr('x', xCircle)
       .attr("y", height - 100 +50)
       .text("Deer Population")
@@ -214,7 +213,7 @@ d3.csv(url, function(data) {
     // Add one dot in the legend for each name.
     var size = 20
     var allgroups = ["Atlantic", "Cumberland", "Mercer", "Passaic","Somerset","Warren"]
-    svg.selectAll("myrect")
+    svg2.selectAll("myrect")
       .data(allgroups)
       .enter()
       .append("circle")
@@ -226,7 +225,7 @@ d3.csv(url, function(data) {
         .on("mouseleave", noHighlight)
 
     // Add labels beside legend dots
-    svg.selectAll("mylabels")
+    svg2.selectAll("mylabels")
       .data(allgroups)
       .enter()
       .append("text")

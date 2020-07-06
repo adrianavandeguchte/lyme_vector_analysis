@@ -64,7 +64,7 @@
             <div class="col-md-12">
               <h3 class="text-center">What is Lyme Disease?</h3>
               <br>
-              <div data-aos="fade-left" data-aos-duration="1000">
+              <div data-aos="zoom-in" data-aos-duration="3000" >
               <div class="col-md-9">
                 <p>Lyme disease is the common term for the disease transmitted by <i>Borrelia burgdorferi</i>, a bacterium whose common vector in North America is the blacklegged or deer tick, <i>Ixodes scapularis</i>.
                   Lyme disease can affect a variety of species, includes deer, mice, horses, dogs, and humans.
@@ -86,12 +86,13 @@
                   <div class="col-md-6">
                   <select id="selectButton"></select>
                   <div id="lymeChart">
+                    <svg id="svg1"></svg>
                   </div>
                   </div>
                   <div class="col-md-6">
                     <div class="row">
                         <div class="col-md-12">
-                            <p data-aos="fade-up-right" data-aos-duration="2000" class="text-center">
+                            <p data-aos="zoom-in" data-aos-duration="3000"  class="text-center">
                                 Paragraph of background of what Lyme is and the caustive parasite. <strong>consectetur adipiscing
                                     elit</strong>. Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea
                                 dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et,
@@ -127,7 +128,7 @@
                       <br>
                         <div class="row">
                           <div class="col-md-12">
-                            <div data-aos="fade-up" data-aos-duration="1000">
+                            <div data-aos="zoom-in" data-aos-duration="3000" >
                             <img alt="B. burgdorferi" class="center-block" src="../static/images/blacklegged-tick_CDC.jpg" />
                           </div>
                         </div>
@@ -143,11 +144,12 @@
       <div class="row">
           <div class="col-md-12">
               <h3 class="text-center">
-                  Deer
+                  The White-tailed Deer
               </h3>
-              <div id="deerChart">
+              <div id="my_chart">
+                <svg id="svg2"></svg>
               </div>
-              <p class="text-center">
+              <p class="text-center" data-aos="zoom-in" data-aos-duration="3000" >
                   Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien.
                   Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum
                   velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam ut cursus.
@@ -166,7 +168,7 @@
               </h3>
               <div id="timeSeries">
               </div>
-              <p class="text-center">
+              <p class="text-center" data-aos="zoom-in" data-aos-duration="3000" >
                   Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien.
                   Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum
                   velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam ut cursus.
@@ -195,8 +197,10 @@
 
       <!-- Leaflet-Choropleth JavaScript -->
       <script type="text/javascript" src="static/js/choropleth.js"></script>
-
-      <!-- Our JS -->
+      <!-- Load color scale -->
+      <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+      <!-- JS -->
+      <script type="text/javascript" src="static/js/logicLymePop.js"></script>
       <!-- <script type="text/javascript" src="static/js/config.js"></script> -->
       <script type="text/javascript" src="static/js/heatmap.js"></script>
       <script type="text/javascript" src="static/js/leaflet-heatmap.js"></script>

@@ -5,10 +5,11 @@ from flask import Flask, jsonify, render_template
 from config import password
 from dbFunction import *
 
+app = Flask(__name__)
+
 #Take care of page not found
 @app.errorhandler(404)
 
-app = Flask(__name__)
 
 # Use inbuilt function which takes error as parameter
 def not_found(e):
