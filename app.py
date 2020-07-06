@@ -38,18 +38,9 @@ def home():
     data = [tick_data, lyme_data]
     return render_template("index.html", data=data)
 
-# @app.route("/lymeHarvestCount")
-# def lymeHarvestCount():
-#     #return render_template("popLyme.html", title="Lyme Harvest Analysis")
-#     return render_template("lymeHarvest.html", title="Lyme Harvest Analysis")
-
-@app.route("/api/v1.0/deerpopLyme")
+@app.route("/deerpopLyme")
 def deerpopLyme():
-    #Get deerpopLyme results
-    deerLymen_dict = fDeerpopLymeCount()
-    print(deerLymen_dict)
-    #Return json output
-    return deerLymen_dict
+    return jsonify(fDeerpopLymeCount())
 
 @app.route("/lymedogs")
 def lyme_dogs():
@@ -69,13 +60,10 @@ def lyme_people():
         lymepeople.append(row)
     return jsonify(lymepeople)
 
-@app.route("/api/v1.0/deerHarvestLyme")
+@app.route("/deerHarvestLyme")
 def deerHarvestLyme():
-    #Get deer harvested Lyme results
-    harLymen_dict = fHarvestLymeCount()
-    print(harLymen_dict)
     #Return json output
-    return harLymen_dict
+    return jsonify(fHarvestLymeCount())
 
 #Application set to debug mode - update debug flag = Flase once testing is done
 if __name__ == '__main__':

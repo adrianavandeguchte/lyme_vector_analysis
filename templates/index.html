@@ -1,227 +1,234 @@
 <!DOCTYPE html>
-<html lang="en-us"
-  <head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-    <!-- Site Icon -->
-    <link rel="icon" href="../static/images/nj_icon.png" type="image/x-icon" sizes="16x16">
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
-    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
-    crossorigin=""/>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/stylesheet.css">
+<html lang="en-us"> 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+<head>
+  <meta charset="UTF-8">
+  <title>Home</title>
+  <!-- Site Icon -->
+  <link rel="icon" href="../static/images/nj_icon.png" type="image/x-icon" sizes="16x16">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+    crossorigin="" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/stylesheet.css">
+  <link rel="stylesheet" href="static/css/deerHarvestLyme.css">
+  <script src="https://d3js.org/d3.v4.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
     integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
     crossorigin=""></script>
-    <!-- d3 JavaScript -->
-    <script src="https://d3js.org/d3.v4.min.js"></script>
+  <!-- d3 JavaScript -->
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
 
-  </head>
+  <link rel="stylesheet" href="static/css/style.css">
+  <link rel="stylesheet" href="static/css/d3Style.css">
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+</head>
 
 
-  <body>
-      <nav class="navbar navbar-inverse navbar-fixed-top">
-          <div class="container-fluid">
-              <div class="navbar-header">
-                  <a class="navbar-brand" href="#">NJ Lyme</a>
-              </div>
-              <ul class="nav navbar-nav navbar-right">
-                  <li class="active"><a href="#">Home</a></li>
-                  <li><a href="../static/pages/prev.html">Prevention</a></li>
-                  <li><a href="../static/pages/doc.html">Documentation</a></li>
-                  <li><a href="../static/pages/ref.html">References</a></li>
-                  <li class="dropdown">
-                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">More Info
-                          <span class="caret"></span></a>
-                      <ul class="dropdown-menu">
-                          <li><a href="https://www.cdc.gov/lyme/index.html">CDC - Lyme Disease</a></li>
-                          <li><a href="https://www.state.nj.us/health/cd/topics/lyme.shtml">NJ DOH</a></li>
-                          <li><a href="https://www.lymedisease.org/">LymeDisease.org</a></li>
-                      </ul>
-                  </li>
-              </ul>
-          </div>
-      </nav>
-      <div class="container-fluid">
-          <div class="row">
-            <div class="img-container">
-              <img src="../static/images/princeton-woods.jpg" alt="Princeton" style="width:100%;">
-              <div class="centered">
-                    <h1 id="primary-title"><strong>
-                        Lyme Disease of New Jersey
-                        <br>
-                        <i><small>cases, vectors, reservoirs</small></i></strong>
-                    </h1>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <h3 class="text-center">What is Lyme Disease?</h3>
-              <br>
-              <div data-aos="zoom-in" data-aos-duration="3000" >
-              <div class="col-md-9">
-                <p>Lyme disease is the common term for the disease transmitted by <i>Borrelia burgdorferi</i>, a bacterium whose common vector in North America is the blacklegged or deer tick, <i>Ixodes scapularis</i>.
-                  Lyme disease can affect a variety of species, includes deer, mice, horses, dogs, and humans.
-                </p>
-              </div>
-              </div>
-              <div class="col-md-3">
-                <img alt="B. burgdorferi" src="../static/images/b-burgdorferi.jpg" />
-              </div>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-              <div class="col-md-12">
-                  <h3 class="text-center">
-                      Burden of Lyme Disease in New Jersey
-                  </h3>
-                  <br>
-                  <div class="col-md-6">
-                  <select id="selectButton"></select>
-                  <div id="lymeChart">
-                  </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p data-aos="zoom-in" data-aos-duration="3000"  class="text-center">
-                                Paragraph of background of what Lyme is and the caustive parasite. <strong>consectetur adipiscing
-                                    elit</strong>. Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea
-                                dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et,
-                                pharetra in dolor. Sed iaculis posuere diam ut cursus. <em>Morbi commodo sodales nisi id sodales.
-                                    Proin consectetur, nisi id commodo imperdiet, metus nunc consequat lectus, id bibendum diam
-                                    velit et dui.</em> Proin massa magna, vulputate nec bibendum nec, posuere nec lacus.
-                                <small>Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla euismod ultrices massa, et
-                                    feugiat ipsum consequat eu.</small>
-                            </p>
-                          </div>
-                        </div>
-
-                    </div>
-                  </div>
-              </div>
-          <hr>
-          <div class="row">
-              <div class="col-md-12">
-                  <h3 class="text-center">
-                      The Black-Legged Tick
-                  </h3>
-                  <br>
-                  <div class="col-md-6">
-                  <p data-aos="zoom-in" data-aos-duration="3000" class="text-center">
-                    Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien.
-                    Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum
-                    velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam ut cursus.
-                    <em>Morbi commodo sodales nisi id sodales. Proin consectetur, nisi id commodo imperdiet, metus nunc
-                      consequat lectus, id bibendum diam velit et dui.</em> Proin massa magna, vulputate nec bibendum nec,
-                      posuere nec lacus. <small>Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla euismod
-                        ultrices massa, et feugiat ipsum consequat eu.</small>
-                      </p>
-                      <br>
-                        <div class="row">
-                          <div class="col-md-12">
-                            <div data-aos="zoom-in" data-aos-duration="3000" >
-                            <img alt="B. burgdorferi" class="center-block" src="../static/images/blacklegged-tick_CDC.jpg" />
-                          </div>
-                        </div>
-                      </div>
-                  </div>
-                  <div class="col-md-6">
-                  <div id="map"></div>
-                </div>
-              </div>
-          </div>
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">NJ Lyme</a>
       </div>
-      <hr>
-      <div class="row">
-          <div class="col-md-12">
-              <h3 class="text-center">
-                  The White-tailed Deer
-              </h3>
-              <div class="col-md-6">
-                <div class="col-md-12">
-                  <div id="my_chart">
-                  </div>
-              </div>
-                <div class="col-md-12">
-                  <div id="svg3">
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <p class="text-center" data-aos="zoom-in" data-aos-duration="3000" >
-                    Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien.
-                    Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum
-                    velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam ut cursus.
-                    <em>Morbi commodo sodales nisi id sodales. Proin consectetur, nisi id commodo imperdiet, metus nunc
-                        consequat lectus, id bibendum diam velit et dui.</em> Proin massa magna, vulputate nec bibendum nec,
-                    posuere nec lacus. <small>Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla euismod
-                        ultrices massa, et feugiat ipsum consequat eu.</small>
-                </p>
-              </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="../static/pages/prev.html">Prevention</a></li>
+        <li><a href="../static/pages/doc.html">Documentation</a></li>
+        <li><a href="../static/pages/ref.html">References</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">More Info
+            <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="https://www.cdc.gov/lyme/index.html">CDC - Lyme Disease</a></li>
+            <li><a href="https://www.state.nj.us/health/cd/topics/lyme.shtml">NJ DOH</a></li>
+            <li><a href="https://www.lymedisease.org/">LymeDisease.org</a></li>
+          </ul>
+        </li>
+      </ul> 
+    </div>
+  </nav>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="img-container">
+        <img src="../static/images/princeton-woods.jpg" alt="Princeton" style="width:100%;">
+        <div class="centered">
+          <h1 id="primary-title"><strong>
+              Lyme Disease of New Jersey
+              <br>
+              <i><small>cases, vectors, reservoirs</small></i></strong>
+          </h1>
         </div>
       </div>
-      <hr>
-      <div class="row">
-          <div class="col-md-12">
-              <h3 class="text-center">
-                  Oak Trees
-              </h3>
-              <div id="timeSeries">
-              </div>
-              <p class="text-center" data-aos="zoom-in" data-aos-duration="3000" >
-                  Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien.
-                  Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum
-                  velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam ut cursus.
-                  <em>Morbi commodo sodales nisi id sodales. Proin consectetur, nisi id commodo imperdiet, metus nunc
-                      consequat lectus, id bibendum diam velit et dui.</em> Proin massa magna, vulputate nec bibendum nec,
-                  posuere nec lacus. <small>Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla euismod
-                      ultrices massa, et feugiat ipsum consequat eu.</small>
-              </p>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="text-center">What is Lyme Disease?</h3>
+        <br>
+        <div data-aos="zoom-in" data-aos-duration="3000">
+          <div class="col-md-9">
+            <p>Lyme disease is the common term for the disease transmitted by <i>Borrelia burgdorferi</i>, a bacterium
+              whose common vector in North America is the blacklegged or deer tick, <i>Ixodes scapularis</i>.
+              Lyme disease can affect a variety of species, includes deer, mice, horses, dogs, and humans.
+            </p>
           </div>
+        </div>
+        <div class="col-md-3">
+          <img alt="B. burgdorferi" src="../static/images/b-burgdorferi.jpg" />
+        </div>
       </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="text-center">
+          Burden of Lyme Disease in New Jersey
+        </h3>
+        <br>
+        <div class="col-md-6">
+          <select id="selectButton"></select>
+          <div id="lymeChart">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-12">
+              <p data-aos="zoom-in" data-aos-duration="3000" class="text-center">
+                Paragraph of background of what Lyme is and the caustive parasite. <strong>consectetur adipiscing
+                  elit</strong>. Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea
+                dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et,
+                pharetra in dolor. Sed iaculis posuere diam ut cursus. <em>Morbi commodo sodales nisi id sodales.
+                  Proin consectetur, nisi id commodo imperdiet, metus nunc consequat lectus, id bibendum diam
+                  velit et dui.</em> Proin massa magna, vulputate nec bibendum nec, posuere nec lacus.
+                <small>Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla euismod ultrices massa, et
+                  feugiat ipsum consequat eu.</small>
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="text-center">
+          The Black-Legged Tick
+        </h3>
+        <br>
+        <div class="col-md-6">
+          <p data-aos="zoom-in" data-aos-duration="3000" class="text-center">
+            Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien.
+            Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum
+            velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam ut cursus.
+            <em>Morbi commodo sodales nisi id sodales. Proin consectetur, nisi id commodo imperdiet, metus nunc
+              consequat lectus, id bibendum diam velit et dui.</em> Proin massa magna, vulputate nec bibendum nec,
+            posuere nec lacus. <small>Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla euismod
+              ultrices massa, et feugiat ipsum consequat eu.</small>
+          </p>
+          <br>
+          <div class="row">
+            <div class="col-md-12">
+              <div data-aos="zoom-in" data-aos-duration="3000">
+                <img alt="B. burgdorferi" class="center-block" src="../static/images/blacklegged-tick_CDC.jpg" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div id="map"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="text-center">
+        The White-tailed Deer
+      </h3>
+      <div class="col-md-6">
+        <div class="col-md-12">
+          <div id="deerCount">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <p class="text-center" data-aos="zoom-in" data-aos-duration="3000">
+          Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien.
+          Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum
+          velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam ut cursus.
+          <em>Morbi commodo sodales nisi id sodales. Proin consectetur, nisi id commodo imperdiet, metus nunc
+            consequat lectus, id bibendum diam velit et dui.</em> Proin massa magna, vulputate nec bibendum nec,
+          posuere nec lacus. <small>Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla euismod
+            ultrices massa, et feugiat ipsum consequat eu.</small>
+        </p>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="text-center">
+        Oak Trees
+      </h3>
+      <div class="col-md-6">
+        <div class="col-md-12">
+          <div id="lymeHarvest">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <p class="text-center" data-aos="zoom-in" data-aos-duration="3000">
+          Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien.
+          Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum
+          velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam ut cursus.
+          <em>Morbi commodo sodales nisi id sodales. Proin consectetur, nisi id commodo imperdiet, metus nunc
+            consequat lectus, id bibendum diam velit et dui.</em> Proin massa magna, vulputate nec bibendum nec,
+          posuere nec lacus. <small>Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla euismod
+            ultrices massa, et feugiat ipsum consequat eu.</small>
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Imported Scripts -->
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+    crossorigin=""></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
 
+  <!-- Leaflet-Choropleth JavaScript -->
+  <script type="text/javascript" src="static/js/choropleth.js"></script>
+  <!-- Load color scale -->
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+  <!-- JS -->
+  <script type="text/javascript" src="static/js/lymeHarvest.js"></script>
+  <script type="text/javascript" src="static/js/logicLymePop.js"></script>
+  <script type="text/javascript" src="static/js/heatmap.js"></script>
+  <script type="text/javascript" src="static/js/leaflet-heatmap.js"></script>
+  <script type="text/javascript">
+    window.data = {{ data | safe }};
+  </script>
+  <script type="text/javascript" src="static/js/config.js"></script>
+  <script type="text/javascript" src="static/js/logic.js"></script>
+  <script src="../static/js/lymeChart.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+</body>
 
-      <!-- Imported Scripts -->
-      <script src="https://d3js.org/d3.v4.min.js"></script>
-      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-          integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-      </script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-          integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-      </script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-      <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
-        integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
-        crossorigin=""></script>
-
-      <!-- Leaflet-Choropleth JavaScript -->
-      <script type="text/javascript" src="static/js/choropleth.js"></script>
-      <!-- Load color scale -->
-      <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-      <!-- JS -->
-      <script type="text/javascript" src="static/js/lymeHarvest.js"></script>
-      <script type="text/javascript" src="static/js/logicLymePop.js"></script>
-      <script type="text/javascript" src="static/js/heatmap.js"></script>
-      <script type="text/javascript" src="static/js/leaflet-heatmap.js"></script>
-      <script type="text/javascript">
-       window.data = {{ data | safe }};
-      </script>
-      <script type="text/javascript" src="static/js/config.js"></script>
-      <script type="text/javascript" src="static/js/logic.js"></script>
-      <script src="../static/js/lymeChart.js"></script>
-      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-      <script>
-        AOS.init();
-      </script>
-  </body>
-
-  </html>
+</html>
