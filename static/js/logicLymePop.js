@@ -1,5 +1,6 @@
 //Data URL
-url="Resources/summaryData/deerpop_lyme_2018.csv"
+const url ="http://127.0.0.1:5000/api/v1.0/deerpopLyme"
+//const url = "ec2-52-0-155-79.compute-1.amazonaws.com:5000/api/v1.0/deerpopLyme"
 
 //Set canvas size
 var svg2Width = 960;
@@ -17,6 +18,7 @@ var margin = {
 var width = svg2Width - margin.left - margin.right;
 var height = svg2Height - margin.top - margin.bottom;
 
+<<<<<<< HEAD
 // set the dimensions and margins of the graph
 var margin = {top: 40, right: 150, bottom: 60, left: 30},
     width = 500 - margin.left - margin.right,
@@ -84,63 +86,69 @@ d3.csv(url, function(data) {
     .domain(["Atlantic", "Cumberland", "Mercer", "Passaic","Somerset","Warren"])
     .range(d3.schemeSet1);
 
+=======
+//Append chart area to canvas
+const svg2 = d3.select('#my_chart')
+    .append('svg2')
+    .attr('width', svgWidth)
+    .attr('height', svgHeight);
 
-  // ------------  TOOLTIP  ------------------//
+//Append chart group 
+var chartGroup = svg2.append('g')
+    .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
-  // -1- Create a tooltip div that is hidden by default:
-  var tooltip = d3.select("#my_chart")
-    .append("div")
-      .style("opacity", 0)
-      .attr("class", "tooltip")
-      .style("background-color", "black")
-      .style("border-radius", "5px")
-      .style("padding", "10px")
-      .style("color", "white")
+//Function  x-scale  
+function xScale(data) {
+  //Create scales
+  var xLinearScale = d3.scaleLinear()
+    .domain([d3.min(data, d => d[4])*.9, d3.max(data, d => d[4])*1.1 ])
+    .range([0, width]);
 
-  // -2- Create 3 functions to show / update (when mouse move but stay on same circle) / hide the tooltip
-  var showTooltip = function(d) {
-    console.log(d)
+  return xLinearScale;
+}
 
-    tooltip
-      .transition()
-      .duration(200)
-    tooltip
-      .style("opacity", 1)
-      .html("County: " + d.county + "<br>Total Sq Miles: " + d.sq_mile + "<br>Deer Population/Sq Mile: " + d.deer_pop + "<br>Lyme Cases: " + d.lyme_cases)
-      .style("left", (d3.deer_pop)+ "px")//mouse(this)[0]+30) + "px")
-      .style("top", (d3.lyme_cases) + "px")//.mouse(this)[1]+30) + "px")
-    //   .style("left", (d3.mouse(this)[0]+30) + "px")
-    //   .style("top", (d3.mouse(this)[1]+30) + "px")
+//Function y-scale  
+function yScale(data) {
+    //Create scales
+    var yLinearScale = d3.scaleLinear()
+      .domain([d3.min(data, d => d[5])*0.9, d3.max(data, d => d[5])*1.1])
+      .range([height, 0]);
+  
+    return yLinearScale;
   }
-  var moveTooltip = function(d) {
-    tooltip
-      .style("left", (d3.deer_pop)+ "px")//mouse(this)[0]+30) + "px")
-      .style("top", (d3.lyme_cases) + "px")//.mouse(this)[1]+30) + "px")
-  }
-  var hideTooltip = function(d) {
-    tooltip
-      .transition()
-      .duration(200)
-      .style("opacity", 0)
-  }
+    
+ //Function - Update Tooltip  
+function updateToolTip(circlesGroup) {
 
+  var toolTip = d3.tip()
+    .attr("class", "d3-tip")
+    .offset([80, -60])
+    .html(function(d) {
+      return (`County:  ${d[2]} <br>Total Sq Miles: ${d[3]} <br>Deer Population/Sq Mile: ${d[4]} <br>Lyme Cases: ${d[5]}`);
+    });
+>>>>>>> deer_lyme_harvest_chart
 
-  // ---------------   HIGHLIGHT GROUP -----------------//
+  circlesGroup.call(toolTip);
 
-  // What to do when one group is hovered
-  var highlight = function(d){
-    // reduce opacity of all groups
-    d3.selectAll(".bubbles").style("opacity", .05)
-    // expect the one that is hovered
-    d3.selectAll("."+d).style("opacity", 1)
-  }
+  //Tooltip show - onmouseover event
+  circlesGroup.on("mouseover", function(data) {
+      toolTip.show(data);
+     })
 
-  // And when it is not hovered anymore
-  var noHighlight = function(d){
-    d3.selectAll(".bubbles").style("opacity", 1)
-  }
+    //Tooltip hide - onmouseout event
+    .on("mouseout", function(data, index) {
+      toolTip.hide(data);
+    });
 
+  return circlesGroup;
+}
 
+//Read the data
+d3.json(url,function(data) {
+
+  console.log(data)
+
+<<<<<<< HEAD
   // ---------------   CIRCLES   ----------------//
 
   // Add dots
@@ -238,3 +246,74 @@ d3.csv(url, function(data) {
       .on("mouseover", highlight)
       .on("mouseleave", noHighlight)
   })
+=======
+  // Add a scale for bubble color
+  var myColor = d3.scaleOrdinal()
+    .domain(["Atlantic", "Cumberland", "Mercer", "Passaic","Somerset","Warren"])
+    .range(d3.schemeSet1);
+ 
+  //1: Create Scales
+    // xLinearScale function  
+    var xLinearScale = xScale(data);
+
+    // yLinearScale function  
+    var yLinearScale = yScale(data) ;
+
+  // 2: Create axis functions
+    var bottomAxis = d3.axisBottom(xLinearScale);
+    var leftAxis = d3.axisLeft(yLinearScale);
+
+  // 3: Append Axes to Chart
+    // append x axis
+    var xAxis = chartGroup.append('g')
+        .attr('transform', `translate(0, ${height})`)
+        .call(bottomAxis);
+
+    // append y axis
+    var yAxis = chartGroup.append('g')
+        .attr("id", "y-axis")
+        .call(leftAxis);
+
+    // 4: Create Circles  
+
+    var circlesGroup = chartGroup.selectAll('circle')
+        .data(data)
+        .enter()
+        .append('circle')
+        .attr('cx', d => xLinearScale(d[4]))
+        .attr('cy', d => yLinearScale(d[5]))
+        .attr("r", function (d) { return d[3]*.15; } )
+        .style("fill", function (d) { return myColor(d[2]); } )
+        .attr("opacity", ".6");
+
+  // 4: Create Axes Labels
+
+      // Create group for  x-axis labels
+      var xlabelsGroup = chartGroup.append("g")
+          .attr("transform", `translate(${width / 2}, ${height + 20})`);
+      
+      // Create group for  y-axis labels
+      var ylabelsGroup = chartGroup.append("g")
+          .attr("transform", `translate(${width / 2}, ${height + 40})`);
+      
+      //Create x-axis lables and define position
+      var deerCountLabel = xlabelsGroup.append("text")
+          .attr("x", 0)
+          .attr("y", 30)
+          .attr("value", "deerCount") // value to grab for event listener
+          .classed("active", true)
+          .text("Deer Count per Square Mile");
+
+      //Create y-axis lables and define position
+      var lymeCountLabel = ylabelsGroup.append("text")
+          .attr("transform", "rotate(-90)")
+          .attr("x", 0 - (width/2) + 700)
+          .attr("y", 0 - (height / 2)-110)
+          .attr("value", "lymeCount") // value to grab for event listener
+          .classed("active", true)
+          .text("Lyme Case Count");
+
+    // 5. UpdateToolTip function above csv import
+      circlesGroup = updateToolTip(circlesGroup);
+  });
+>>>>>>> deer_lyme_harvest_chart
