@@ -2,8 +2,8 @@
 d3.json("/incidentMonths", function (err, monthData) {
 console.log(monthData);
 
-var values = monthData.cases;
-var months = monthData.month;
+var values = monthData.map(d => d.cases);
+var months = monthData.map(d => d.month);
 
 console.log(months);
 

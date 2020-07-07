@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="../css/stylesheet.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
   </head>
 
   <body>
@@ -52,10 +54,13 @@
       </h3>
       <br>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
       <img alt="Areas at risk in US" src="https://www.cdc.gov/ncezid/dvbd/images/media/lymedisease/LD-2018-dot-map.jpg" />
     </div>
-		<div class="col-md-6">
+    <div class="col-md-4">
+      <div id="incidentPie">
+    </div>
+		<div class="col-md-4">
 			<p>
 				Within the United States the areas most at risk for Lyme Disease centers on the New-England and Mid-Atlantic regions, with some areas along the North-Pacific also at risk.
         Because Lyme Disease is carried by tick species, and ticks are most commonly found in forested areas or the lands adjacent individuals are most at risk in rural and suburuban environments.
@@ -192,7 +197,7 @@
 		</div>
 	</div>
 </div>
-
+      <script src="../js/months.js"></script>
   </body>
 
   </html>
