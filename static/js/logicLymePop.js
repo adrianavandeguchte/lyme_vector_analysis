@@ -1,7 +1,7 @@
 
 //Set canvas size
 var svgWidth = 500;
-var svgHeight = 300;
+var svgHeight = 400;
 
 //Set up svg2 chartMargins
 var margin = {
@@ -102,7 +102,7 @@ d3.json("/deerpopLyme",function(data) {
         .attr("id", "y-axis")
         .call(leftAxis);
 
-    // 4: Create Circles 
+    // 4: Create Circles
     var circlesGroup1 = chartGroup1.selectAll('circle')
         .data(data)
         .enter()
