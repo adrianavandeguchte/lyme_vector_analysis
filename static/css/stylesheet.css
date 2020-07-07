@@ -11,6 +11,22 @@ p {
   padding: 20px;
   border: 1px solid #e3e3e3;
 }
+.tick_check {
+    background-color: #c1e0f3;
+    border-style: ridge;
+    border-color: antiquewhite;
+}
+
+.symptoms {
+  background-color: #e6e5e4;
+  font-size: smaller;
+  border-style: groove;
+}
+
+.todoif {
+  background-color: #e6e5e4;
+  border-style: groove;
+}
 
 body {
   /* Padding bottom by footer height */
