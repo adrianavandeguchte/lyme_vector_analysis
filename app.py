@@ -51,6 +51,15 @@ def lyme_dogs():
         lymedogs.append(row)
     return jsonify(lymedogs)
 
+@app.route("/incidentYears")
+def incident_years():
+    result_prox = engine.execute("select * from njincidentrate")
+    incidentYears = []
+    for r in result_prox:
+        row = {"year":r[0],"casesCapita":r[1]}
+        lymedogs.append(row)
+    return jsonify(incidentYears)
+
 @app.route("/lymepeople")
 def lyme_people():
     result_prox = engine.execute("select * from lymepeople")
