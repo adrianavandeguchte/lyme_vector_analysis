@@ -6,6 +6,16 @@ p {
   font-size: larger;
 }
 
+#timeChart {
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-bottom: 50px;
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
 #doc-title {
     margin-top: 80px;
     margin-bottom: 40px;

@@ -76,7 +76,7 @@ async function chartIt() {
     var response = await fetch('/incidentYears');
     var data = await response.json();
     mastYears = [2007,2010,2015,2017];
-    
+
     for (var i=0; i < data.yearCase.length; i++) {
       year = data.yearCase[i][0];
       cases = data.yearCase[i][1];

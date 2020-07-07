@@ -9,7 +9,7 @@ var data = [{
   type: "pie",
   values: values,
   labels:  months,
-  textinfo: "label+percent",
+  hoverinfo: "label",
   textposition: "outside",
   automargin: true
 }]
