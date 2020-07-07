@@ -33,172 +33,211 @@
         </ul>
       </div>
 </nav>
-  <div class="container-fluid">
+<div class="container-fluid">
 	<div class="row">
-		<div class="col-md-12">
-			<div class="text-center" id="page-title">
-				<h1>
-					Documentation
-          <br>
-          <small>Tasks, Tools, Limitations</small>
-        </h1>
-
-          The incidence of lyme disease has been increasing in recent years.  Data was reviewed for the entire United States but the primary focus was on New Jersey.  This was because New Jersey has a higher prevalence of lyme disease than many other states and it is local to our team.
-
-
-          Our team identified the following as areas for research in determing trends for the incidence of lyme disease:<br>
-            <br>Is lyme disease more common in counties with higher deer populations?
-            <br>Does deer hunting / population control reduce lyme disease?
-            <br>Is warm weather a predictor in the following year's lyme disease rates?
-            <br>Do oak mast years cause an increase in lyme disease the following year?
-
-            <br>
-            <br>
-
-        <h3>Tasks</h3>
-        The team completed many tasks to finish the project.  The initial step was data gathering.  This was done through web scraping and downloading relevant files that were available.  These datasets were reviewed and in some cases eliminated from being included in our research.
-        <br><br>
-        The next task was to clean the data that was kept from the data gathering.  This included formatting changes, as well as continuing to remove unnecessary data.  The cleaned data was saved in .csv files for loading into the database.
-        <br><br>
-        The remaining tasks were to create and populate the database, design the overall web site flow, create visualiztions and analyze the data to draw conclusions.
-        <br><br>
-        <h3>Tools</h3>
-        Many tools were utilized in this project, including:
-        <br>
-        <br>Jupyter Notebook
-        <br>Pandas
-        <br>Bootstrap
-        <br>d3.js
-        <br>leaflet.js
-        <br>Flask
-        <br>Postgres
-        <br><br>
-        <h3>Limitations</h3>
-        There were some limitations in researching this topic.  The main limitations were:
-        <br>
-        <br>Data was not completely available for all counties and / or years for NJ.
-        <br>The number of ticks in an area was not available, just if a tick presence was established.
-        <br>Lyme disease cases were based on residency of the affected subject rather than where it was contracted.
-
-			</div>
+		<div class="col-md-12" style="text-align:center">
+            <h1 style="margin-top:80px; margin-bottom:40px;"><strong>
+                Documentation
+                <br>
+                <i><small>tasks, tools, limitations</small></i></strong>
+            </h1>
 		</div>
 	</div>
-  <!-- <div class="container-fluid">
-  	<div class="row">
-  		<div class="col-md-12">
-  			<h3>
-  				h3. Lorem ipsum dolor sit amet.
-  			</h3>
-  		</div>
-  	</div>
-  	<div class="row">
-  		<div class="col-md-12">
-  			<div class="row">
-  				<div class="col-md-6">
-  					<p>
-  						Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam ut cursus. <em>Morbi commodo sodales nisi id sodales. Proin consectetur, nisi id commodo imperdiet, metus nunc consequat lectus, id bibendum diam velit et dui.</em> Proin massa magna, vulputate nec bibendum nec, posuere nec lacus. <small>Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla euismod ultrices massa, et feugiat ipsum consequat eu.</small>
-  					</p>
-  				</div>
-  				<div class="col-md-6">
-  					<dl>
-  						<dt>
-  							Description lists
-  						</dt>
-  						<dd>
-  							A description list is perfect for defining terms.
-  						</dd>
-  						<dt>
-  							Euismod
-  						</dt>
-  						<dd>
-  							Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.
-  						</dd>
-  						<dd>
-  							Donec id elit non mi porta gravida at eget metus.
-  						</dd>
-  						<dt>
-  							Malesuada porta
-  						</dt>
-  						<dd>
-  							Etiam porta sem malesuada magna mollis euismod.
-  						</dd>
-  						<dt>
-  							Felis euismod semper eget lacinia
-  						</dt>
-  						<dd>
-  							Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-  						</dd>
-  					</dl>
-  				</div>
-  			</div>
-  		</div>
-  	</div>
-  	<div class="row">
-  		<div class="col-md-12">
-  			<div class="row">
-  				<div class="col-md-6">
-  					<dl>
-  						<dt>
-  							Description lists
-  						</dt>
-  						<dd>
-  							A description list is perfect for defining terms.
-  						</dd>
-  						<dt>
-  							Euismod
-  						</dt>
-  						<dd>
-  							Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.
-  						</dd>
-  						<dd>
-  							Donec id elit non mi porta gravida at eget metus.
-  						</dd>
-  						<dt>
-  							Malesuada porta
-  						</dt>
-  						<dd>
-  							Etiam porta sem malesuada magna mollis euismod.
-  						</dd>
-  						<dt>
-  							Felis euismod semper eget lacinia
-  						</dt>
-  						<dd>
-  							Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-  						</dd>
-  					</dl>
-  				</div>
-  				<div class="col-md-6">
-  					<ul>
-  						<li class="list-item">
-  							Lorem ipsum dolor sit amet
-  						</li>
-  						<li class="list-item">
-  							Consectetur adipiscing elit
-  						</li>
-  						<li class="list-item">
-  							Integer molestie lorem at massa
-  						</li>
-  						<li class="list-item">
-  							Facilisis in pretium nisl aliquet
-  						</li>
-  						<li class="list-item">
-  							Nulla volutpat aliquam velit
-  						</li>
-  						<li class="list-item">
-  							Faucibus porta lacus fringilla vel
-  						</li>
-  						<li class="list-item">
-  							Aenean sit amet erat nunc
-  						</li>
-  						<li class="list-item">
-  							Eget porttitor lorem
-  						</li>
-  					</ul>
-  				</div>
-  			</div>
-  		</div>
-  	</div>
-  </div> -->
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row" style="text-align:center">
+          <h3>
+            Background
+          </h3>
+					<p>
+						The incidence of Lyme disease has been increasing in recent years. We started this project with the goal of examining that increase and analyzing how ecological factors may be contributing. Data was reviewed for the entire United States, but the primary focus was on New Jersey. This was because New Jersey has a higher prevalence of Lyme disease than many other states and it is local to our team. We identified the following questions as guides for research in determining trends for the incidence of Lyme disease:
+					</p>
+          <ul style="list-style:none">
+            <li>
+              Is Lyme disease more common in counties with higher deer populations?
+            </li>
+            <li>
+              Does deer hunting / population control reduce Lyme disease?
+            </li>
+            <li>
+              Is warm weather a predictor in the following year's Lyme disease rates?
+            </li>
+            <li>
+              Do oak mast years cause an increase in Lyme disease the following year?
+            </li>
+          </ul>
+        </div>
+      </div>
+      <hr>
+				<div class="col-md-6">
+          <h3>
+            Tasks
+          </h3>
+					<dl>
+						<dt>
+							Find and extract source data
+						</dt>
+						<dd>
+						  The first step was identifying data sources and extracting the data from them.
+						</dd>
+						<dt>
+							Data cleaning and normalization
+						</dt>
+						<dd>
+							From our raw data inputs we cleaned and normalized the data with the goal of setting up a reference database.
+						</dd>
+						<dt>
+							Database management
+						</dt>
+						<dd>
+							Normalized data was then loaded into a Postgres development database prior to being converted into a Heroku database.
+						</dd>
+						<dt>
+							Analysis and visualization
+						</dt>
+						<dd>
+							Visualizations were built concurrently by different team members, with some charts being worked on in teams. We aimed to use a variety of JavaScript libraries to build our visualizations.
+						</dd>
+            <dt>
+              Build dashboard and website
+            </dt>
+            <dd>
+              The dashboard function of the website was built around the interative visualizations before the website was finished with styling and written content.
+            </dd>
+					</dl>
+				</div>
+        <div class="col-md-6">
+          <h3>
+            Limitations
+          </h3>
+          <ul>
+            <li class="list-item">
+              Data was not completely available for all counties and / or years for NJ.
+            </li>
+            <li class="list-item">
+              The number of ticks in an area was not available, just if a tick presence was established.
+            </li>
+            <li class="list-item">
+              Lyme disease cases were based on residency of the affected subject rather than where it was contracted.
+            </li>
+            <li class="list-item">
+              Mast index not recorded by NJ, we had to use local news reporting to identify mast years, which may be incomplete.
+            </li>
+            <li class="list-item">
+              Monthly weather data was too granular for our time frame to fully analyze.
+            </li>
+            <li class="list-item">
+              Deer population data had to be extrapolated for certain years.
+            </li>
+            <li class="list-item">
+              Deer harvest data was based on Deer Management Zones, some of which spanned multiple counties so assumptions had to be made in assigning a single county to each zone.
+            </li>
+          </ul>
+        </div>
+	</div>
+	<div class="row">
+		<div class="col-md-12" style="text-align:center">
+          <h3>
+            Tools
+          </h3>
+					<dl>
+						<dt>
+							Data Scraping
+						</dt>
+						<dd>
+							Splinter - web scraping
+						</dd>
+            <dd>
+              Beautiful Soup - web scraping
+            </dd>
+            <dd>
+              Tabula - PDF scraping
+            </dd>
+						<dt>
+							Cleaning and Normalization
+						</dt>
+            <dd>
+              Pandas - Dataframe manipulation
+            </dd>
+            <dd>
+              numPy - data handling
+            </dd>
+            <dd>
+              Statistics - linear regression for population extrapolation
+            </dd>
+						<dt>
+							Database Setup and Management
+						</dt>
+						<dd>
+							Flask - local server hosting
+						</dd>
+            <dd>
+              SQLAlchemy - database loading
+            </dd>
+            <dd>
+              Postgres - database storage
+            </dd>
+            <dd>
+              Heroku - database storage
+            </dd>
+						<dt>
+  						Analysis and Visualizations
+						</dt>
+						<dd>
+							d3.js - Interactive Line Charts
+						</dd>
+            <dd>
+              plotly.js - Pie Charts
+            </dd>
+            <dd>
+              leaflet.js - Choropleth, Heatmap
+            </dd>
+            <dd>
+              Chart.js - Line Charts
+            </dd>
+            <dt>
+              Dashboard and Website Build
+            </dt>
+            <dd>
+              Heroku - website hosting
+            </dd>
+            <dd>
+              Bootstrap - formatting
+            </dd>
+            <dd>
+              AOS - scroll animations
+            </dd>
+            <dt>
+              Development Environments
+            </dt>
+            <dd>
+              Visual Studio
+            </dd>
+            <dd>
+              PyCharm
+            </dd>
+            <dd>
+              Atom
+            </dd>
+            <dd>
+              Jupyter Nootebook
+            </dd>
+            <dt>
+              Collaboration
+            </dt>
+            <dd>
+              GitHub - version control
+            </dd>
+            <dd>
+              Slack - messaging
+            </dd>
+            <dd>
+              Zoom - video interface, screen sharing
+            </dd>
+					</dl>
+				</div>
+      </div>
+			</div>
   </body>
 
   </html>
