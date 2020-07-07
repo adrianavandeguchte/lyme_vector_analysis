@@ -53,12 +53,13 @@ def lyme_dogs():
 
 @app.route("/incidentYears")
 def incident_years():
-    result_prox = engine.execute("select * from njincidentrate")
+    result_prox = engine.execute("select year,cases_per_100k from njincidentrate")
     incidentYears = []
     for r in result_prox:
-        row = {"year":r[0],"casesCapita":r[1]}
-        lymedogs.append(row)
-    return jsonify(incidentYears)
+        row = [r[0],r[1]]
+        incidentYears.append(row)
+    incidentDict = {'yearCase': incidentYears}
+    return incidentDict
 
 @app.route("/lymepeople")
 def lyme_people():
