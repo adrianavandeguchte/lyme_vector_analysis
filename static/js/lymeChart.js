@@ -3,7 +3,7 @@ var width = 350;
 var height = 250;
 var margin = 10;
 var padding = 10;
-var adj = 40;
+var adj = 60;
 
 var svg1 = d3.select("#lymeChart").append("svg")
     // .attr("preserveAspectRatio", "xMinYMin meet")
@@ -84,6 +84,19 @@ d3.json("/lymepeople", function (err, lyme_people) {
         svg1.append("g")
             .call(d3.axisLeft(y)
           .ticks(6));
+
+        svg1.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin - 50)
+        .attr("x", 0 - (height / 2))
+        .attr("dy", "1em")
+        .attr("class", "axisText")
+        .text("Lyme Disease Cases");
+        svg1.append("text")
+        .attr("transform", `translate(${width / 2}, ${height + margin + 30})`)
+        .attr("class", "axisText")
+        .text("Year");
+
         var line = d3.line()
             .x(function (d) {
                 return x(d.year);
@@ -162,7 +175,17 @@ d3.json("/lymepeople", function (err, lyme_people) {
             svg1.append("g")
                 .attr("transform", "translate(0," + height + ")")
                 .call(d3.axisBottom(x));
-
+            svg1.append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 0 - margin - 50)
+                .attr("x", 0 - (height / 2))
+                .attr("dy", "1em")
+                .attr("class", "axisText")
+                .text("Lyme Disease Cases");
+            svg1.append("text")
+                .attr("transform", `translate(${width / 2}, ${height + margin + 30})`)
+                .attr("class", "axisText")
+                .text("Year");
 
             // sets new Y axis
             var y = d3.scaleLinear()
