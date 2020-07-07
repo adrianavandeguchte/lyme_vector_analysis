@@ -2,6 +2,11 @@
   font-family: "Times New Roman", Times, serif;
 }
 
+P {
+  font-size: larger;
+}
+
+
 .iframeContainer {
   padding: 20px;
   border: 1px solid #e3e3e3;
