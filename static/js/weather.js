@@ -1,6 +1,7 @@
 
 var xlabels = [];
 var ytemps = [];
+var ymast = [];
 
 chartIt();
 
@@ -9,6 +10,8 @@ async function chartIt() {
   await getData();
   console.log(xlabels);
   console.log(ytemps);
+  console.log(ymast);
+
   var myChart = new Chart(ctx, {
     type: 'line',
     data: {
@@ -20,6 +23,11 @@ async function chartIt() {
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: 'rgba(255, 99, 132, 1)',
         borderWidth: 1
+      },
+      {
+        label: 'Mast Years',
+        data: ymast,
+        type: 'bar'
       }]
     },
     options: {
@@ -66,18 +74,22 @@ async function chartIt() {
 
   async function getData() {
     var response = await fetch('/incidentYears');
-    var data = await response.text();
-    console.log(data);
-    var table = data.split('\n').slice(1);
-    table.forEach(row => {
-      var columns = row.split(',')
-      var year = columns[0];
-      console.log(year );
-      var cases = columns[1];
-      console.log(cases);
+    var data = await response.json();
+    mastYears = [2007,2010,2015,2017];
+    
+    for (var i=0; i < data.yearCase.length; i++) {
+      year = data.yearCase[i][0];
+      cases = data.yearCase[i][1];
       ytemps.push(cases);
       xlabels.push(year);
-    });
+      if (mastYears.includes(year)) {
+        yearValue = 60;
+      }
+      else {
+        yearValue = 0;
+      }
+      ymast.push(yearValue);
+    };
   }
 }
 
