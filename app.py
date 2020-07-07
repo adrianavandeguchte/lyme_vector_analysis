@@ -42,6 +42,18 @@ def home():
 def deerpopLyme():
     return jsonify(fDeerpopLymeCount())
 
+@app.route("/incidentMonths")
+def incidentMonths():
+    result_prox = engine.execute("select * from njmonthonset")
+    incidentMonths = []
+    for r in result_prox:
+        row = {"month":r[1],"cases":r[2]}
+        incidentMonths.append(row)
+    return jsonify(incidentMonths)
+
+
+
+
 @app.route("/lymedogs")
 def lyme_dogs():
     result_prox = engine.execute("select * from lymedogs")
