@@ -1,21 +1,7 @@
-//Data url
-var url ="http://127.0.0.1:5000/api/v1.0/deerHarvestLyme"
-//const url = "ec2-52-0-155-79.compute-1.amazonaws.com:5000/api/v1.0/deerHarvestLyme"
-
-// The code for the chart is wrapped inside a function that automatically resizes the chart
-function makeResponsive() {
-
-// // if the svg2 area isn't empty when the browser loads, remove it and replace it with a resized version of the chart
-//   var svgArea = d3.select("body").select("#svg3");
-//
-//   // clear svg2 is not empty
-//   if (!svgArea.empty()) {
-//     svgArea.remove();
-//   }
 
 // Chart Params
-var svgWidth = 350;
-var svgHeight = 250;
+var svgWidth = 500;
+var svgHeight = 400;
 var circleRadius =7;
 var formatComma = d3.format(",")
 
@@ -27,19 +13,17 @@ var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
 
 // Create an svg2 wrapper, append an svg2 group that will hold our chart, and shift the latter by left and top margins.
-var svg2 = d3
-  .select("#svg3")
+var svg3 = d3.select("#lymeHarvest")
   .append("svg")
   .attr("width", svgWidth)
   .attr("height", svgHeight);
 
-var chartGroup = svg2.append("g")
+var chartGroup2 = svg3.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 // Import data from an external CSV file
-d3.json(url,function(deerData) {
+d3.json("/deerHarvestLyme",function(deerData) {
 
-console.log(deerData)
   // Create a function to parse date and time
   var parseTime = d3.timeParse("%Y");
 
@@ -49,8 +33,6 @@ console.log(deerData)
     data[2] = +data[2];
     data[3] = +data[3];
   });
-
-  console.log(deerData);
 
   // Create scaling functions
   var xTimeScale = d3.scaleTime()
@@ -72,18 +54,18 @@ console.log(deerData)
   var rightAxis = d3.axisRight(yLinearScale2);
 
   // Add x-axis
-  chartGroup.append("g")
+  chartGroup2.append("g")
     .attr("transform", `translate(0, ${height})`)
     .call(bottomAxis);
 
   // Add y1-axis to the left side of the display
-  chartGroup.append("g")
+  chartGroup2.append("g")
     // Define the color of the axis text
     .classed("green", true)
     .call(leftAxis);
 
   // Add y2-axis to the right side of the display
-  chartGroup.append("g")
+  chartGroup2.append("g")
     // Define the color of the axis text
     .classed("red", true)
     .attr("transform", `translate(${width}, 0)`)
@@ -99,19 +81,19 @@ console.log(deerData)
     .y(d => yLinearScale2(d[3]));
 
   // Append a path for line1
-  chartGroup.append("path")
+  chartGroup2.append("path")
     .data([deerData])
     .attr("d", line1)
     .classed("line green", true);
 
   // Append a path for line2
-  chartGroup.append("path")
+  chartGroup2.append("path")
     .data([deerData])
     .attr("d", line2)
     .classed("line red", true);
 
     // append circles for harvested count
-    var circlesGroup = chartGroup.selectAll("circle")
+    var circlesGroup2 = chartGroup2.selectAll("circle1")
     .data(deerData)
     .enter()
     .append("circle")
@@ -123,7 +105,7 @@ console.log(deerData)
     .attr("stroke", "black");
 
     // append circles for lyme case count
-    var circlesGroup1 =chartGroup.selectAll("circle1")
+    var circlesGroup3 =chartGroup2.selectAll("circle2")
     .data(deerData)
     .enter()
     .append("circle")
@@ -133,15 +115,17 @@ console.log(deerData)
     .attr("fill", "orange")
     .attr("stroke-width", "1")
     .attr("stroke", "black");
-
+console.log(height - 60)
   // Append axes titles
-  chartGroup.append("text")
-  .attr("transform", `translate(${width / 2}, ${height + margin.top + 20})`)
+  chartGroup2.append("text")
+  .attr("transform", `translate(${width / 2}, ${height - 60})`)
+  //.attr("transform", `translate(${width / 2}, ${height + margin.top + 200})`)
     .classed("har-text text", true)
-    .text("Harvested Deer Count ");
+    .text("Harvested Deer Count "); //#190#210
 
-  chartGroup.append("text")
-  .attr("transform", `translate(${width / 2}, ${height + margin.top + 37})`)
+  chartGroup2.append("text")
+  .attr("transform", `translate(${width / 2}, ${height - 80})`)
+  //.attr("transform", `translate(${width / 2}, ${height + margin.top + 370})`)
     .classed("deer-text text", true)
     .text("Lyme Case Count");
 
@@ -155,10 +139,10 @@ console.log(deerData)
  });
 
 // Step 2: Create the tooltip in chartGroup.
-chartGroup.call(toolTip1);
+chartGroup2.call(toolTip1);
 
 // Step 3: Create "mouseover" event listener to display tooltip
-circlesGroup.on("mouseover", function(d) {
+circlesGroup2.on("mouseover", function(d) {
  toolTip1.show(d, this);
 })
 // Step 4: Create "mouseout" event listener to hide tooltip
@@ -168,7 +152,7 @@ circlesGroup.on("mouseover", function(d) {
 
  // Step 1: Initialize Tooltip
  var toolTip2 = d3.tip()
- .attr("class", "tooltip")
+ .attr("class", "tooltipx") 
  .offset([80, -60])
  .html(function(d) {
     var dateFormat = d3.timeFormat("%Y");
@@ -176,10 +160,10 @@ circlesGroup.on("mouseover", function(d) {
  });
 
 // Step 2: Create the tooltip in chartGroup.
-chartGroup.call(toolTip2);
+chartGroup2.call(toolTip2);
 
 // Step 3: Create "mouseover" event listener to display tooltip
-circlesGroup1.on("mouseover", function(d) {
+circlesGroup3.on("mouseover", function(d) {
  toolTip2.show(d, this);
 })
 // Step 4: Create "mouseout" event listener to hide tooltip
@@ -187,13 +171,4 @@ circlesGroup1.on("mouseover", function(d) {
    toolTip2.hide(d);
  });
 
-}).catch(function(error) {
-  console.log(error);
-});
-
-}
-// When the browser loads, makeResponsive() is called.
-makeResponsive();
-
-// When the browser window is resized, makeResponsive() is called.
-d3.select(window).on("resize", makeResponsive);
+})

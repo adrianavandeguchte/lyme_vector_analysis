@@ -1,17 +1,14 @@
-//Data URL
-var url ="http://127.0.0.1:5000/api/v1.0/deerpopLyme"
-//const url = "ec2-52-0-155-79.compute-1.amazonaws.com:5000/api/v1.0/deerpopLyme"
 
 //Set canvas size
-var svgWidth = 960;
-var svgHeight = 800;
+var svgWidth = 500;
+var svgHeight = 300;
 
 //Set up svg2 chartMargins
 var margin = {
-    top: 20,
-    right: 20,
-    bottom: 90,
-    left: 100
+    top: 10,
+    right: 10,
+    bottom: 10,
+    left: 40
 };
 
 //Calculcate chart width/height
@@ -19,20 +16,20 @@ var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
 
 //Append chart area to canvas
-const svg2 = d3.select('#my_chart')
+const svg2 = d3.select('#deerCount')
     .append('svg')
     .attr('width', svgWidth)
     .attr('height', svgHeight);
 
 //Append chart group
-var chartGroup = svg2.append('g')
+var chartGroup1 = svg2.append('g')
     .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
 //Function  x-scale
 function xScale(data) {
   //Create scales
   var xLinearScale = d3.scaleLinear()
-    .domain([d3.min(data, d => d[4])*.9, d3.max(data, d => d[4])*1.1 ])
+    .domain([d3.min(data, d => d[4])*.7, d3.max(data, d => d[4])*1.2])
     .range([0, width]);
 
   return xLinearScale;
@@ -42,14 +39,14 @@ function xScale(data) {
 function yScale(data) {
     //Create scales
     var yLinearScale = d3.scaleLinear()
-      .domain([d3.min(data, d => d[5])*0.9, d3.max(data, d => d[5])*1.1])
+      .domain([d3.min(data, d => d[5])*0.7, d3.max(data, d => d[5])*1.2])
       .range([height, 0]);
 
     return yLinearScale;
   }
 
  //Function - Update Tooltip
-function updateToolTip(circlesGroup) {
+function updateToolTip(circlesGroup1) {
 
   var toolTip = d3.tip()
     .attr("class", "d3-tip")
@@ -58,10 +55,10 @@ function updateToolTip(circlesGroup) {
       return (`County:  ${d[2]} <br>Total Sq Miles: ${d[3]} <br>Deer Population/Sq Mile: ${d[4]} <br>Lyme Cases: ${d[5]}`);
     });
 
-  circlesGroup.call(toolTip);
+  circlesGroup1.call(toolTip);
 
   //Tooltip show - onmouseover event
-  circlesGroup.on("mouseover", function(data) {
+  circlesGroup1.on("mouseover", function(data) {
       toolTip.show(data);
      })
 
@@ -70,11 +67,11 @@ function updateToolTip(circlesGroup) {
       toolTip.hide(data);
     });
 
-  return circlesGroup;
+  return circlesGroup1;
 }
 
 //Read the data
-d3.json(url,function(data) {
+d3.json("/deerpopLyme",function(data) {
 
   console.log(data)
 
@@ -96,35 +93,34 @@ d3.json(url,function(data) {
 
   // 3: Append Axes to Chart
     // append x axis
-    var xAxis = chartGroup.append('g')
+    var xAxis = chartGroup1.append('g')
         .attr('transform', `translate(0, ${height})`)
         .call(bottomAxis);
 
     // append y axis
-    var yAxis = chartGroup.append('g')
+    var yAxis = chartGroup1.append('g')
         .attr("id", "y-axis")
         .call(leftAxis);
 
-    // 4: Create Circles
-
-    var circlesGroup = chartGroup.selectAll('circle')
+    // 4: Create Circles 
+    var circlesGroup1 = chartGroup1.selectAll('circle')
         .data(data)
         .enter()
         .append('circle')
         .attr('cx', d => xLinearScale(d[4]))
         .attr('cy', d => yLinearScale(d[5]))
-        .attr("r", function (d) { return d[3]*.15; } )
+        .attr("r", function (d) {return d[3]*.075; } )
         .style("fill", function (d) { return myColor(d[2]); } )
         .attr("opacity", ".6");
 
   // 4: Create Axes Labels
 
       // Create group for  x-axis labels
-      var xlabelsGroup = chartGroup.append("g")
+      var xlabelsGroup = chartGroup1.append("g")
           .attr("transform", `translate(${width / 2}, ${height + 20})`);
 
       // Create group for  y-axis labels
-      var ylabelsGroup = chartGroup.append("g")
+      var ylabelsGroup = chartGroup1.append("g")
           .attr("transform", `translate(${width / 2}, ${height + 40})`);
 
       //Create x-axis lables and define position
@@ -145,5 +141,5 @@ d3.json(url,function(data) {
           .text("Lyme Case Count");
 
     // 5. UpdateToolTip function above csv import
-      circlesGroup = updateToolTip(circlesGroup);
+      circlesGroup1 = updateToolTip(circlesGroup1);
   });

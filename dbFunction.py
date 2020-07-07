@@ -34,9 +34,8 @@ def fDeerpopLymeCount():
         cur.execute('SELECT * FROM  "public"."deerpopcounty"')
         data = [col for col in cur]
         cur.close()
-        print(data)
         conn.close()
-        return jsonify(data)
+        return data
     except:
         print("Failed to get database result for deerpopcounty table.")
 
@@ -46,11 +45,9 @@ def fHarvestLymeCount():
         conn = dbConnection(db_host,db_name,db_user,db_password)
         cur = conn.cursor()
         cur.execute('SELECT * FROM  "public"."lymeHarvest"')
-
         data = [col for col in cur]
         cur.close()
-        print(data)
         conn.close()
-        return jsonify(data)
+        return data
     except:
         print("Failed to get database result for lymeHarvest table.")
